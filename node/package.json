@@ -1,0 +1,18 @@
+{
+  "name": "node",
+  "version": "0.1.0",
+  "description": "Simple example for node",
+  "engines": {
+    "node": "0.10.26",
+    "npm": "2.1.9"
+  },
+  "dependencies": {
+    "fs": "0.0.2",
+    "figlet": "1.1.0",
+    "formidable": "1.0.16"
+  },
+  "main": "node_modules/docpad/bin/docpad-server",
+  "scripts": {
+    "start": "node_modules/docpad/bin/docpad-server"
+  }
+}

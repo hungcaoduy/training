@@ -5,11 +5,9 @@
 **/*.log
 **/.docpad.db
 
-node_modules/
-out/
+**/node_modules/
+**/out/
 # =====================================
-src/files/vendor/**
-src/files/vendor/angular.js
-src/files/vendor/angular-ui-router.js
-!src/files/vendor/jquery.js
-!src/files/vendor/bootstrap
+docpad/src/files/vendor/*
+!docpad/src/files/vendor/bootstrap/
+!docpad/src/files/vendor/jquery.js
