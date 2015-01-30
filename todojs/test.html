@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <h1 >Todo list</h1>
+    <style type="text/css" href="/vendor/bootstrap/css/bootstrap.css"></style>
+    <style type="text/css">
+        body {
+            background: lightgray;
+        }
+        h1 {
+            text-transform: uppercase;
+        }
+        tr {
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <label for lightgray>lightgray</label><input type="radio" name="color" value="lightgray" checked="">
+            <input type="radio" name="color" value="mediumpurple">
+            <input type="radio" name="color" value="lightgreen">
+            <input  type="radio" name="color" value="lightblue">
+        </div>
+        <div>
+            <input type="file" multiple name="files">
+        </div>
+        <form id="taskForm">
+            <p>Enter task <input id="newTask" name="value">
+                <button id="save" type="submit" value="save">Save</button></p>
+                <p>Enter upto 256, remain: <span id="length"></span></p>
+        </form>
+        <table>
+            <thead>
+                <th>id</th>
+                <th>Task</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Do more exercises</td>
+                    <td><input type="checkbox" class="taskStatus"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        Notes : <select id ="list" > </select>
+        <button onclick =" addNote()" >new</button><br>
+        <textarea id = "currentnote" style = "width: 100%; height:10em">
+        </textarea >
+</div>
+<div style="width: 800px; height: 800px; background-color: white;">
+    <p style ="text-align: center" >
+    <img src ="/images/comment.png" style =" position : relative" >
+    </p >
+
+</div>
+</body>
+    <script data-main="main" src="lib/require.js"></script>
+    <script type="text/javascript">
+        var form = document.querySelector("#taskForm");
+        var text = document.querySelector("#newTask");
+        var output = document.querySelector("#length");
+        var checkbox = document.querySelector(".taskStatus");
+        var colors = document.getElementsByName("color");
+        var files = document.getElementsByName('files')[0];
+        console.log(files);
+
+        form.addEventListener("submit", function (e) {
+            console.log("Saving value ", form.elements.value.value);
+            e.preventDefault();
+        });
+        text.addEventListener("input", function (event) {
+            output.textContent = 256 - text.value.length;
+        });
+        checkbox.addEventListener("change", function (event) {
+            checkbox.style.color = checkbox.checked ? "blue" : "lightgray";
+        });
+
+        function setColor(event) {
+            document.body.style.background = event.target.value;
+        }
+        for (var i = 0; i < colors.length; i++) {
+            colors[i].addEventListener("change", setColor);
+        }
+
+        files.addEventListener("change", function () {
+            Array.prototype.forEach.call(files.files, function (file) {
+                var reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    console.log("File ", file.name, " start with ", reader.result.slice(0, 100));
+                });
+                reader.readAsText(file);
+            });
+        });
+
+        var list = document.querySelector("#list") ;
+        function addToList (name) {
+            var option = document.createElement("option") ;
+            option.textContent = name;
+            list.appendChild(option);
+        }
+        // Initialize the list from localStorage
+        var notes = JSON.parse(localStorage.getItem ("notes") ) ||
+            {"shopping list": ""};
+        for(var name in notes )
+            if(notes.hasOwnProperty(name ))
+                addToList(name ) ;
+        function saveToStorage () {
+            localStorage.setItem("notes" , JSON.stringify(notes));
+        }
+        var current = document.querySelector ("#currentnote") ;
+        current.value = notes[list.value];
+        list.addEventListener ("change" , function () {
+            current.value = notes[list.value];
+            console.log("here " + list.value);
+        });
+        current.addEventListener ("change" , function () {
+            notes[list.value] = current.value;
+            saveToStorage();
+        });
+        function addNote () {
+            var name = prompt ("Note name" , "") ;
+            if (! name ) return;
+            if (! notes.hasOwnProperty(name)) {
+                notes [name] = "";
+                addToList(name) ;
+                saveToStorage() ;
+            }
+            list.value = name ;
+            current.value = notes[name];
+        }
+    </script>
+<!--     <script type="text/javascript">
+    var bd = document.querySelector("body");
+    console.log(bd.childNodes);
+    console.log(bd.parentNode);
+    console.log(bd.nextSibling);
+    </script>
+
+    <script type="text/javascript">
+        var cat = document.querySelector("img");
+        console.log(cat);
+        var angle = 0, lastTime = null;
+        function animate(time) {
+            if (lastTime != null) {
+                angle += (time - lastTime) * 0.001;
+            }
+            lastTime = time;
+            cat.style.top = (Math.sin(angle) * 100) + "px";
+            cat.style.left = (Math.cos(angle) * 200) + "px";
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    </script>
+
+    <script type="text/javascript">
+        var tid = setInterval( function () {
+            if ( document.readyState !== 'complete' ) return;
+            clearInterval( tid );
+            //actual work here
+            var dsb = document.getElementById("save");
+            dsb.setAttribute("disabled", "disabled");
+            //dsb.disable = true;
+        }, 100 );
+    </script>
+ --></html>
