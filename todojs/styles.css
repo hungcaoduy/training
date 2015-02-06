@@ -1,0 +1,15 @@
+.container {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+table, form {
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    text-transform: uppercase;
+}
+.completed {
+    text-decoration: line-through;
+}

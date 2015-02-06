@@ -1,39 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<style type="text/css" href="/vendor/bootstrap/css/bootstrap.css"></style>
-    <style type="text/css">
-    .container {
-        width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    h1 {
-        text-transform: uppercase;
-    }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 	<div class="container">
         <h1>Todo list!</h1>
         <form id="taskForm">
-            <p>Enter task <input id="newTask" name="value">
-                <button id="save" type="submit" value="save">Save</button>
-                Enter upto 256, remain: <span id="length"></span></p>
+            <p><input id="newTask" name="value" value="do it">
+                <button id="save" type="submit" value="save">Save</button></p>
+                Enter upto 256, remain: <span id="length"></span>
         </form>
         <table id = "myTable">
             <thead>
-                <th>id</th>
                 <th>Task</th>
-                <th>Status</th>
+                <th>Complete</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Do more exercises</td>
-                    <td><input type="checkbox" class="taskStatus"></td>
-                </tr>
             </tbody>
         </table>
     </div>
