@@ -7,8 +7,9 @@ app.Book = Backbone.Model.extend({
         releaseDate: 'Unknown',
         keywords: 'None'
     },
-    parse: function(response) {
-        response.id = response._id;
-        return response;
-    }
+    // parse: function(response) {
+    //     response.id = response._id;
+    //     return response;
+    // },
+    idAttribute: '_id'
 });

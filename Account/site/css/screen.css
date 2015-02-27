@@ -1,0 +1,57 @@
+body {
+    background-color: #eee;
+}
+.itemContainer {
+    outline: 1px solid #aaa;
+    width: 350px;
+    height: 130px;
+    background-color: #fff;
+    float: left;
+    margin: 5px;
+}
+.itemContainer img {
+    float: left;
+    margin: 10px;
+    height: 100px;
+    width: auto;
+}
+.itemContainer ul {
+    list-style-type: none;
+    margin-bottom: 0;
+}
+.itemContainer button {
+    float: right;
+    margin: 10px;
+}
+#addItem label {
+    width: 100px;
+    margin-right: 10px;
+    text-align: right;
+    line-height: 25px;
+}
+#addItem label, #addItem input {
+    display: block;
+    margin-bottom: 10px;
+    float: left;
+}
+#addItem label[for="title"], #addItem label[for="releaseDate"] {
+    clear: both;
+}
+#addItem button {
+    display: block;
+    margin: 5px 20px 10px 10px;
+    float: right;
+    clear: both;
+}
+#addItem div {
+    width: 600px;
+}
+#addItem div:after {
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+}
