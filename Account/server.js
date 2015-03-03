@@ -28,7 +28,7 @@ app.listen( port, function() {
 //routes
 //get items
 app.get('/api/items', function(request, response) {
-    return BookModel.find(function(err, items) {
+    return ItemModel.find(function(err, items) {
         if (!err) {
             return response.send(items);
         } else {
@@ -36,58 +36,62 @@ app.get('/api/items', function(request, response) {
         }
     });
 });
-//insert a new book
+//insert a new item
 app.post('/api/items', function(request, response) {
-    var book = new BookModel({
+    var item = new ItemModel({
         title: request.body.title,
         author: request.body.author,
-        releaseDate: request.body.releaseDate,
-        keywords: request.body.keywords
+        effectiveDate: request.body.effectiveDate,
+        keywords: request.body.keywords,
+        createdDate: new Date(),
+        createdBy: 'Unknown'
     });
-    book.save(function(err) {
+    item.save(function(err) {
         if (!err) {
             return console.log('created');
         } else {
             return console.log(err);
         }
     });
-    return response.send(book);
+    return response.send(item);
 });
-//get a single book by id
+//get a single item by id
 app.get('/api/items/:id', function(request, response) {
-    return BookModel.findById(request.params.id, function(err, book) {
+    return ItemModel.findById(request.params.id, function(err, item) {
         if (!err) {
-            return response.send(book);
+            return response.send(item);
         } else {
             return console.log(err);
         }
     });
 });
-//Update a book
+//Update a item
 app.put( '/api/items/:id', function( request, response ) {
-    console.log( 'Updating book ' + request.body.title );
-    return BookModel.findById( request.params.id, function( err, book ) {
-        book.title = request.body.title;
-        book.author = request.body.author;
-        book.releaseDate = request.body.releaseDate;
-        book.keywords = request.body.keywords;
-        return book.save( function( err ) {
+    console.log( 'Updating item ' + request.body.title );
+    return ItemModel.findById( request.params.id, function( err, item ) {
+        item.title = request.body.title;
+        item.author = request.body.author;
+        item.effectiveDate = request.body.effectiveDate;
+        item.keywords = request.body.keywords;
+        item.createdDate = new Date();
+        item.createdBy = 'Unknown';
+        return item.save( function( err ) {
             if( !err ) {
-                console.log( 'book updated' );
+                console.log( 'item updated' );
             } else {
                 console.log( err );
             }
-            return response.send( book );
+            return response.send( item );
         });
     });
 });
-//Delete a book
+//Delete a item
 app.delete( '/api/items/:id', function( request, response ) {
-    console.log( 'Deleting book with id: ' + request.params.id );
-    return BookModel.findById( request.params.id, function( err, book ) {
-        return book.remove( function( err ) {
+    console.log( 'Deleting item with id: ' + request.params.id );
+    return ItemModel.findById( request.params.id, function( err, item ) {
+        return item.remove( function( err ) {
             if( !err ) {
-                console.log( 'Book removed' );
+                console.log( 'Item removed' );
                 return response.send( '' );
             } else {
                 console.log( err );
@@ -96,18 +100,24 @@ app.delete( '/api/items/:id', function( request, response ) {
     });
 });
 //connect to database
-mongoose.connect('mongodb://localhost/library_database');
+mongoose.connect('mongodb://localhost/account_database');
 
 //schemas
 var Keywords = new mongoose.Schema({
     keyword: String
 });
-var Book = new mongoose.Schema({
+var Item = new mongoose.Schema({
     title: String,
-    author: String,
-    releaseDate: Date,
-    keywords: [Keywords]
+    description: String,
+    url: String,
+    //image: String,
+    keywords: [Keywords],
+    effectiveDate: Date,
+    createdDate: Date,
+    createdBy: String,
+    updatedDate: Date,
+    updatedBy: String
 });
 
 //models
-var BookModel = mongoose.model('Book',Book);
+var ItemModel = mongoose.model('Item',Item);

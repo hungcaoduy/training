@@ -1,8 +1,8 @@
 <ul >
-    <img src="<%= coverImage %>"
+    <img src="<%= image %>"
     <li><%= title %></li>
-    <li><%= author %></li>
-    <li><%= $.format.date(new Date(releaseDate), 'MMMM yyyy') %></li>
+    <li><%= description %></li>
+    <li><%= $.format.date(new Date(effectiveDate), 'MMMM yyyy') %></li>
     <li><% _.each(keywords, function(keyobj)  {%>
     <%= keyobj.keyword %> <% }); %></li>
 

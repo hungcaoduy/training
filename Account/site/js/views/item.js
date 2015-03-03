@@ -1,7 +1,7 @@
-define(['text!templates/item.html'], function(itemTemplate) {
+define(['backbone', 'text!templates/item.html'], function(Backbone, itemTemplate) {
     var ItemView = Backbone.View.extend({
         tagName: 'div',
-        className: 'bookContainer',
+        className: 'itemContainer',
         template: _.template(itemTemplate),
         render: function() {
             //console.log(this.template);

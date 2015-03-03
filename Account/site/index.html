@@ -3,26 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <title>Backbone.js Library</title>
-    <link rel="stylesheet" href="css/screen.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/jquery/jquery-ui.css">
 </head>
 <body>
 
 <div id="items">
     <form id="addItem" action="#">
-        <div >
-            <label for="coverImage">Image: </label>
-            <input id="coverImage" type="file" />
-            <label for="title">Title: </label>
-            <input id="title" type="text" />
-            <label for="author">Author: </label>
-            <input id="author" type="text" />
-            <label for="releaseDate">Release date: </label>
-            <input id="releaseDate" type="text" />
-            <label for="keywords">Keywords: </label>
-            <input id="keywords" type="text" />
+        <ul class="formfiels">
+            <li><label for="image">Image: </label>
+            <input id="image" type="file" /></li>
+            <li><label for="title">Title: </label>
+            <input id="title" type="text" /></li>
+            <li><label for="description">Description: </label>
+            <input id="description" type="text" /></li>
+            <li><label for="effectiveDate">effective date: </label>
+            <input id="effectiveDate" type="text" /></li>
+            <li><label for="keywords">Keywords: </label>
+            <input id="keywords" type="text" /></li>
             <button id="add">Add</button>
-        </div>
+        </ul>
     </form>
 </div>
 <script data-main="js/app.js" src="js/lib/require.js"></script>
