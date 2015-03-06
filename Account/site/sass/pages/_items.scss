@@ -1,0 +1,31 @@
+form {
+    width: $formWidth;
+    margin: 15px 15px 0 15px;
+}
+
+.itemContainer {
+    width: $itemContainerWidth;
+    float: left;
+    border: 1px solid lightgray;
+    & button {
+        padding-left: 0;
+    }
+}
+// .itemContainer ul:after {
+//     content: "";
+//     display: block;
+//     height: 0;
+//     visibility: hidden;
+//     clear: both;
+//     font-size: 0;
+//     line-height: 0;
+// }
+ul img {
+    max-height: 100px;
+    width: auto;
+    float: left;
+    margin-right: 10px;
+}
+ul li {
+    list-style: none;
+}

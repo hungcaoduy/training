@@ -5,6 +5,6 @@
     <li><%= $.format.date(new Date(effectiveDate), 'MMMM yyyy') %></li>
     <li><% _.each(keywords, function(keyobj)  {%>
     <%= keyobj.keyword %> <% }); %></li>
-
+    <button class="delete btn btn-link">Delete </button>
 </ul>
-<button class="delete">Delete </button>
+

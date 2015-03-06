@@ -1,6 +1,8 @@
 @import "compass";
 @import "normalize";
-@import "items/items";
+@import "variables";
+@import "pages/items";
+@import "pages/login";
 //@import "jquery-ui";
 //try to convert and import: sass-convert --from css --to scss css/jquery/jquery-ui.css > sass/_jquery-ui.scss
 //http://www.iain.nl/using-sass-with-jquery-ui

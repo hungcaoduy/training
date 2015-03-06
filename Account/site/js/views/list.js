@@ -1,5 +1,5 @@
-define(['collections/items', 'views/item'],
-    function(Items, ItemView){
+define(['models/item', 'collections/items', 'views/item', 'views/addItem'],
+    function(Item, Items, ItemView, AddItemView){
     ListView = Backbone.View.extend({
         el: '#items',
         initialize: function() {
@@ -16,10 +16,13 @@ define(['collections/items', 'views/item'],
         },
         renderItem: function(item) {
             var itemView = new ItemView({model: item});
-            this.$el.append(itemView.render().el);
+            //this.$el.append(itemView.render().el);
+            this.$('#itemsView').append(itemView.render().el);
         },
         events: {
-            'click #add': 'addItem'
+            'click #add': 'addItem',
+            'click #addFull': 'addFull',
+            'click #toggleItemsView': 'toggleItemsView'
         },
         addItem: function(e) {
             e.preventDefault();
@@ -42,6 +45,20 @@ define(['collections/items', 'views/item'],
             });
             this.collection.create(formData);
             //console.log(this.collection);
+        },
+        addFull: function(e) {
+            event.preventDefault();
+            event.stopPropagation();
+            var modal = new AddItemView({model: new Item()});
+            modal.render().showModal({
+                x: e.pageX,
+                y: e.pageY
+            });
+        },
+        toggleItemsView: function(e) {
+            event.preventDefault();
+            event.stopPropagation();
+            $('#itemsView').toggle();
         }
     });
     return ListView;

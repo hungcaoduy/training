@@ -3,29 +3,76 @@
 <head>
     <meta charset="utf-8" />
     <title>Backbone.js Library</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/jquery/jquery-ui.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/test.css">
+
 </head>
 <body>
 
+<section class="header">
+    <div class="nav">
+        <a href="#login-box" class="login-window">Login / Sign In</a>
+    </div>
+</section>
+
 <div id="items">
-    <form id="addItem" action="#">
-        <ul class="formfiels">
-            <li><label for="image">Image: </label>
-            <input id="image" type="file" /></li>
-            <li><label for="title">Title: </label>
-            <input id="title" type="text" /></li>
-            <li><label for="description">Description: </label>
-            <input id="description" type="text" /></li>
-            <li><label for="effectiveDate">effective date: </label>
-            <input id="effectiveDate" type="text" /></li>
-            <li><label for="keywords">Keywords: </label>
-            <input id="keywords" type="text" /></li>
-            <button id="add">Add</button>
-        </ul>
+    <form id="addItem" action="#" class="form-horizontal">
+        <div class="form-group">
+            <label for="title" class="col-sm-4 control-label">Title: </label>
+            <div class="col-sm-8">
+                <input id="title" type="text" class="form-control col-sm-8" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="effectiveDate" class="col-sm-4 control-label">effective date: </label>
+            <div class="col-sm-8">
+                <input id="effectiveDate" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-4 control-label">Description: </label>
+            <div class="col-sm-8">
+                <input id="description" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="image" class="col-sm-4 control-label">Image: </label>
+            <div class="col-sm-8">
+                <input id="image" type="file" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="keywords" class="col-sm-4 control-label">Keywords: </label>
+            <div class="col-sm-8">
+                <input id="keywords" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+        </div>
     </form>
+    <div class="actions">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button id="add" class="btn btn-default">Add</button>
+            <button id="addFull" class="btn btn-default">AddFull</button>
+            <button id="toggleItemsView" class="btn btn-default">View/Hide list</button>
+        </div>
+    </div>
+    <div id="itemsView">
+
+    </div>
+
+    <div id="siteloader"></div>​
+
+
 </div>
 <script data-main="js/app.js" src="js/lib/require.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 </body>
 
 </html>
