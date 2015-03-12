@@ -1,78 +1,51 @@
-/*global require*/
-'use strict';
+/*global define */
 
-require.config({
-    baseUrl: "js",
-    paths: {
-        'underscore': 'lib/underscore',
-        'backbone': 'lib/backbone',
-        'jquery': 'lib/jquery',
-        'jquery-dateFormat': 'lib/jquery-dateFormat',
-        'jquery-ui': 'lib/jquery-ui',
-        'text': 'lib/text',
-        'bootstrap': '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min',
-        'modalview': 'lib/Backbone.ModalDialog'
-    },
-    shim: {
-        'underscore': {
-            exports: '_'
-        },
-        'backbone': {
-            deps: ['underscore', 'jquery'],
-            exports: 'Backbone'
-        },
-        'jquery': {
-            exports: '$'
-        },
-        'jquery-dateFormat': {
-            deps: ['jquery']
-        },
-        'jquery-ui': {
-            deps: ['jquery']
-        },
-        'bootstrap': {
-            deps: ['jquery']
-        },
-        'modalview': {
-            deps: ['backbone'],
-            exports: 'ModalView'
-        }
-    }
-});
-
-require([
-    'jquery',
-    'backbone',
-    'views/list',
-    'routers/router',
-    'views/login',
+define([
+    'marionette',
+    'collections/items',
+    'views/itemsBCompositeV',//'views/itemsCompositeV',
+    'views/loginView',
+    'views/addEditItem',//'views/addItem',
+    'models/item',
     'jquery-dateFormat',
-    'jquery-ui',
-    'bootstrap',
-    'modalview'
-], function ($, Backbone, AppView, Workspace, LoginView) {
-    /*jshint nonew:false*/
-    $('#effectiveDate').datepicker();
-    // Initialize routing and start Backbone.history()
-    new Workspace();
-    Backbone.history.start();
+    'jquery-ui'
+    // 'views/Header',
+    // 'views/TodoListCompositeView',
+    // 'views/Footer'
+], function (Marionette, Items, ItemsView, LoginView, AddItem, Item) {
+    'use strict';
 
-    // Initialize the application view
-    new AppView();
+    var app = new Marionette.Application();
+    var items = new Items();
+    var viewOptions = {
+        collection: items
+    };
 
-    var login = new LoginView();
+    // var header = new Header(viewOptions);
+    // var main = new TodoListCompositeView(viewOptions);
+    // var footer = new Footer(viewOptions);
 
-    //login
-    $('a.login-window').click(function() {
-        login.render();
+    app.addRegions({
+        header: '#header',
+        form: '#form',
+        list: '#list',
+        footer: '#footer'
+    });
+
+    app.addInitializer(function () {
+        var vent = _.extend({}, Backbone.Events);
+        var login = new LoginView();
+        //items.fetch();
+        var addItemForm = new AddItem({model: new Item(), vent: vent});
+        var itemsView = new ItemsView({collection: items, addEditItemView: addItemForm, vent: vent});
+        app.header.show(login);
+        app.form.show(addItemForm);
+        //app.list.show(itemsView);
+
+
     });
 
 
-    //http://stackoverflow.com/questions/9963799/ajax-jquery-load-webpage-content-into-a-div-on-page-load
-    //$("#siteloader").html('<object data="https://css-tricks.com/">');
-});
 
-/*define([],function(){
-
+    return app;
 });
-*/

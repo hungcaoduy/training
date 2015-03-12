@@ -1,3 +1,16 @@
+/*global define */
+/*define([
+    'marionette'
+], function (Marionette) {
+    'use strict';
+
+    return Marionette.AppRouter.extend({
+        appRoutes: {
+            '*filter': 'setFilter'
+        }
+    });
+});
+*/
 define(['backbone'], function(Backbone) {
     var Workspace = Backbone.Router.extend({
         routes: {
@@ -12,3 +25,4 @@ define(['backbone'], function(Backbone) {
     });
     return Workspace;
 });
+

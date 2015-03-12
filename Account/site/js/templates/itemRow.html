@@ -1,0 +1,11 @@
+    <td><!-- <img src="<%= image %>"> --></td>
+    <td><%= title %></td>
+    <td><%= $.format.date(new Date(effectiveDate), 'MMMM yyyy') %></td>
+    <td><%= description %></td>
+    <td><% _.each(keywords, function(keyobj)  {%>
+    <%= keyobj.keyword %> <% }); %></td>
+    <td>
+        <a href="#" class="btn btn-small js-show"><i class="icon-eye-open"></i>Show</a>
+        <button class="delete btn btn-link"><i class="icon-remove"></i>Delete </button>
+    </td>
+
