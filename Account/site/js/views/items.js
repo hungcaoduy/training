@@ -1,7 +1,7 @@
 define(['models/item', 'collections/items', 'views/item', 'views/addItem'],
     function(Item, Items, ItemView, AddItemView){
     ListView = Backbone.View.extend({
-        el: '#itemsView',
+        el: '#list',
         initialize: function() {
             this.collection = new Items();
             this.collection.fetch({reset: true});
@@ -17,7 +17,7 @@ define(['models/item', 'collections/items', 'views/item', 'views/addItem'],
         renderItem: function(item) {
             var itemView = new ItemView({model: item});
             this.$el.append(itemView.render().el);
-            //this.$('#itemsView').append(itemView.render().el);
+            //this.$('').append(itemView.render().el);
         },
         events: {
             'click #add': 'addItem',

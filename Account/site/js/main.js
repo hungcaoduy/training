@@ -84,12 +84,12 @@ require([
     'app',
     'backbone',
     'routers/router',
-    'controllers/controller'
-], function (app, Backbone, Router, Controller) {
+    'controllers/controller',
+    'views/items'
+], function (app, Backbone, Router, Controller, ItemsView) {
     'use strict';
 
     app.start();
-
     new Router({ controller: Controller });
 
     Backbone.history.start();

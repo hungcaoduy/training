@@ -3,8 +3,9 @@ define(['backbone', 'text!templates/addEdititem.html'], function(Backbone, itemT
         tagName: 'div',
         template: _.template(itemTemplate),
         initialize: function(options) {
-            //_.bindAll(this, "editItem");
-            //options.vent.bind("editItem", this.editItem)
+            this.vent = options.vent;
+            _.bindAll(this, "editItem");
+            this.vent.bind("editItem", this.editItem);
         },
         render: function() {
             //console.log(this.template);
@@ -14,15 +15,10 @@ define(['backbone', 'text!templates/addEdititem.html'], function(Backbone, itemT
             return this;
         },
         events: {
-            'click .delete': 'deleteItem'
+            'click .js-save': 'saveItem'
         },
-        deleteItem: function() {
-            this.model.destroy();
-            this.remove();
-        },
-        editItem: function(item) {
-            this.model = item;
-            this.render();
+        saveItem: function() {
+            this.vent.trigger("saveItem", this.model);
         }
     });
     return ItemView;

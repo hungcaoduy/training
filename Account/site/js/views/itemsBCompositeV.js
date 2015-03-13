@@ -1,18 +1,18 @@
 define(['models/item', 'collections/items', 'views/item', 'views/addEditItem'],
     function(Item, Items, ItemView, AddItemView){
     ListView = Backbone.View.extend({
-        el: '#itemsView',
+        el: '#list',
         initialize: function(options) {
             this.collection = options.collection;
-            this.addEditItemView = options.addEditItemView;
             this.vent = options.vent;
             this.collection.fetch({reset: true});
             this.render();
             this.listenTo(this.collection, 'add', this.renderItem);
             this.listenTo(this.collection, 'reset', this.render);
+            _.bindAll(this, saveItem);
+            this.vent.bind('saveItem', this.saveItem);
         },
         render: function() {
-            //this.addEditItemView.render();
             this.collection.each(function(item) {
                 this.renderItem(item);
             }, this);
@@ -20,14 +20,12 @@ define(['models/item', 'collections/items', 'views/item', 'views/addEditItem'],
         renderItem: function(item) {
             var itemView = new ItemView({model: item, vent: this.vent});
             this.$el.append(itemView.render().$el);
-            //this.$('#itemsView').append(itemView.render().el);
         },
         events: {
-            'click #add': 'addItem',
-            'click #save': 'saveItem'
         },
-        addItem: function() {
-            this.addEditItemView.render();
+        saveItem: function(item) {
+            this.collection.create(item);
+            console.log('item ', item.title, 'saved!');
         }
     });
     return ListView;

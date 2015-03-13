@@ -35,9 +35,8 @@ define([
     app.addInitializer(function () {
         var vent = _.extend({}, Backbone.Events);
         var login = new LoginView();
-        //items.fetch();
         var addItemForm = new AddItem({model: new Item(), vent: vent});
-        var itemsView = new ItemsView({collection: items, addEditItemView: addItemForm, vent: vent});
+        var itemsView = new ItemsView({collection: items, vent: vent});
         app.header.show(login);
         app.form.show(addItemForm);
         //app.list.show(itemsView);
