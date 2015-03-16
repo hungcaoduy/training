@@ -15,10 +15,24 @@ define(['backbone', 'text!templates/addEdititem.html'], function(Backbone, itemT
             return this;
         },
         events: {
-            'click .js-save': 'saveItem'
+            'click .js-save': 'saveItem',
+            'keyup input': 'keyup'
+        },
+        editItem: function(item) {
+            console.log("now render ", "edititem", item);
+            this.model = item;
+            this.render();
         },
         saveItem: function() {
+            console.log(this.model);
             this.vent.trigger("saveItem", this.model);
+            console.log('saveItem event raised!');
+        },
+        keyup: function(e)
+        {
+            //console.log('keyup fired');
+            //console.log("target name=" + e.target.id,"value=" + e.target.value);
+            this.model.set(e.target.id, e.target.value, {silent: true});
         }
     });
     return ItemView;

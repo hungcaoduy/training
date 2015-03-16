@@ -39,6 +39,7 @@ define([
         var itemsView = new ItemsView({collection: items, vent: vent});
         app.header.show(login);
         app.form.show(addItemForm);
+        $("#effectiveDate").datepicker();
         //app.list.show(itemsView);
 
 

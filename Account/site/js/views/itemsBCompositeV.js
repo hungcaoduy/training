@@ -9,7 +9,7 @@ define(['models/item', 'collections/items', 'views/item', 'views/addEditItem'],
             this.render();
             this.listenTo(this.collection, 'add', this.renderItem);
             this.listenTo(this.collection, 'reset', this.render);
-            _.bindAll(this, saveItem);
+            _.bindAll(this, 'saveItem');
             this.vent.bind('saveItem', this.saveItem);
         },
         render: function() {
@@ -25,7 +25,7 @@ define(['models/item', 'collections/items', 'views/item', 'views/addEditItem'],
         },
         saveItem: function(item) {
             this.collection.create(item);
-            console.log('item ', item.title, 'saved!');
+            console.log('item ', item, 'saved!');
         }
     });
     return ListView;
