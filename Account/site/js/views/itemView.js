@@ -1,8 +1,10 @@
-define(['app', 'marionette', 'tpl!templates/itemRow.html', 'views/addEditItem'],
+define(['app', 'marionette', 'tpl!templates/itemRow.html', 'views/addEditItemV'],
                     function(app, Marionette, itemTemplate, ItemShow) {
     var ItemView = Marionette.ItemView.extend({
         tagName: 'tr',
-        //className: 'itemContainer',
+        initialize: function(options) {
+            this.vent = options.vent;
+        },
         template: itemTemplate,
         events: {
             'click .delete': 'deleteItem',
@@ -19,9 +21,7 @@ define(['app', 'marionette', 'tpl!templates/itemRow.html', 'views/addEditItem'],
         showItem: function(e) {
             e.preventDefault();//use to stop default behaviour, e.g link will not work
             e.stopPropagation(); //stop this element's parent to get this event
-            //app.list.show(this)
-            itShow = new ItemShow({model: this.model});
-            itShow.render();
+            this.vent.trigger("showItem", this.model);
         },
         remove: function() {
             var self = this;

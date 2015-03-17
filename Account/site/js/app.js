@@ -3,9 +3,9 @@
 define([
     'marionette',
     'collections/items',
-    'views/itemsBCompositeV',//'views/itemsCompositeV',
+    'views/itemsCompositeV',//'views/itemsBCompositeV',
     'views/loginView',
-    'views/addEditItem',//'views/addItem',
+    'views/addEditItemV',//'views/addEditItem', 'views/addItem'
     'models/item',
     'jquery-dateFormat',
     'jquery-ui'
@@ -40,12 +40,15 @@ define([
         app.header.show(login);
         app.form.show(addItemForm);
         $("#effectiveDate").datepicker();
-        //app.list.show(itemsView);
-
-
+        items.fetch();
+        app.list.show(itemsView);
     });
 
-
+    app.vent.on("itemsView:showItem", function(item) {
+        var addItemForm = new AddItem({model: item, vent: vent});
+        console.log("vent caught");
+        app.form.showItem(addItemForm);
+    });
 
     return app;
 });
