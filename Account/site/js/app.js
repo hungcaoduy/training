@@ -8,7 +8,8 @@ define([
     'views/addEditItemV',//'views/addEditItem', 'views/addItem'
     'models/item',
     'jquery-dateFormat',
-    'jquery-ui'
+    'jquery-ui',
+    'syphon'
     // 'views/Header',
     // 'views/TodoListCompositeView',
     // 'views/Footer'
@@ -42,13 +43,14 @@ define([
         $("#effectiveDate").datepicker();
         items.fetch();
         app.list.show(itemsView);
+
+        vent.on("childview:showItem", function(childView,item,items) {
+            console.log("app caught ", item);
+            var addItemForm = new AddItem({model: item, vent: vent});
+            app.form.show(addItemForm);
+        });
     });
 
-    app.vent.on("itemsView:showItem", function(item) {
-        var addItemForm = new AddItem({model: item, vent: vent});
-        console.log("vent caught");
-        app.form.showItem(addItemForm);
-    });
 
     return app;
 });

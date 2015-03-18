@@ -4,7 +4,7 @@ define(['models/item', 'collections/items', 'views/itemView', 'views/addEditItem
         tagName: "table",
         className: "table table-hover",
         childView: ItemView,
-        childViewOptions: {
+        /*childViewOptions: {
             vent: this.vent //why does not this work
         },
         buildChildView: function(child, ChildViewClass, childViewOptions){
@@ -16,18 +16,22 @@ define(['models/item', 'collections/items', 'views/itemView', 'views/addEditItem
             var view = new ChildViewClass(options);
             // return it
             return view;
-        },
+        },*/
         template: tableTemplate,
         childViewContainer: "tbody",
         initialize: function(options) {
             this.vent = options.vent;
-            _.bindAll(this, 'showItem');
-            this.vent.bind('showItem', this.showItem);
+            this.on("childview:showItem", this.showItem);
+            this.on("childview:updateItem", this.updateItem);
 
         },
-        showItem: function(e) {
-            this.vent.trigger("showItem", this.model);
+        showItem: function(childView, item) {
+            this.vent.trigger("childview:showItem", childView, item, this.collection);
+            //this.trigger("showItem", childView, item, this.collection);
             console.log("collection view catch the showItem");
+        },
+        updateItem: function() {
+            this.render();
         }
 
     });

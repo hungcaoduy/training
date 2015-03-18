@@ -40,7 +40,7 @@ app.get('/api/items', function(request, response) {
 app.post('/api/items', function(request, response) {
     var item = new ItemModel({
         title: request.body.title,
-        author: request.body.author,
+        description: request.body.description,
         effectiveDate: request.body.effectiveDate,
         keywords: request.body.keywords,
         createdDate: new Date(),
@@ -70,7 +70,7 @@ app.put( '/api/items/:id', function( request, response ) {
     console.log( 'Updating item ' + request.body.title );
     return ItemModel.findById( request.params.id, function( err, item ) {
         item.title = request.body.title;
-        item.author = request.body.author;
+        item.description = request.body.description;
         item.effectiveDate = request.body.effectiveDate;
         item.keywords = request.body.keywords;
         item.createdDate = new Date();

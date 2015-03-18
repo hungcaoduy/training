@@ -53,6 +53,7 @@ require.config({
         'tpl': 'lib/underscore-tpl',
         'jquery-dateFormat': 'lib/jquery-dateFormat',
         'jquery-ui': 'lib/jquery-ui',
+        'syphon': 'lib/backbone.syphon'
     },
     shim: {
         underscore: {
@@ -74,6 +75,9 @@ require.config({
         },
         'tpl': {
             deps: ['text']
+        },
+        'syphon': {
+            deps: ['backbone']
         }
     },
     deps: ['jquery', 'underscore']
