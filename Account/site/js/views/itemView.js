@@ -5,6 +5,7 @@ define(['app', 'marionette', 'tpl!templates/itemRow.html', 'views/addEditItemV']
         initialize: function(options) {
             this.vent = options.vent;
             this.listenTo(this.model, "change", this.modelChanged);
+            this.listenTo(this.model, "destroy", this.remove);
         },
         template: itemTemplate,
         events: {
@@ -12,8 +13,10 @@ define(['app', 'marionette', 'tpl!templates/itemRow.html', 'views/addEditItemV']
             'click': 'highlightName',
             'click .js-show': 'showItem'
         },
-        deleteItem: function() {
+        deleteItem: function(e) {
             this.model.destroy();
+            e.stopPropagation();
+            console.log("model destroyed from itemview!");
         },
         highlightName: function(e) {
             console.log($(e.target).text());
@@ -28,7 +31,7 @@ define(['app', 'marionette', 'tpl!templates/itemRow.html', 'views/addEditItemV']
         remove: function() {
             var self = this;
             this.$el.fadeOut(1000, function() {
-                //Marionette.ItemView.prototype.remove.call(self);
+                Marionette.ItemView.prototype.remove.call(self);
             });
         },
         modelChanged: function() {

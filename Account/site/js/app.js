@@ -36,7 +36,19 @@ define([
     app.addInitializer(function () {
         var vent = _.extend({}, Backbone.Events);
         var login = new LoginView();
-        var addItemForm = new AddItem({model: new Item(), vent: vent});
+        var itemData = {
+            title: 'default title',
+            description: 'Unknown',
+            url: 'Unknown',
+            image: 'img/placeholder.jpg',
+            keywords: 'None',
+            effectiveDate: new Date().getTime(),
+            createdDate: 'Unknown',
+            createdBy: 'Unknown',
+            updatedDate: 'Unknown',
+            updatedBy: 'Unknown'
+        };
+        var addItemForm = new AddItem({model: items.add(itemData), vent: vent});
         var itemsView = new ItemsView({collection: items, vent: vent});
         app.header.show(login);
         app.form.show(addItemForm);

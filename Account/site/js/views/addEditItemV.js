@@ -19,6 +19,7 @@ define(['marionette', 'tpl!templates/addEditItem.html'], function(Marionette, it
         },
         saveItem: function(e) {
             e.preventDefault();
+            console.log("the model to be save: ",this.model);
             var data = Backbone.Syphon.serialize(this);
             console.log("data ",data);
             this.model.set(data);

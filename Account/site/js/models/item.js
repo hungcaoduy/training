@@ -13,8 +13,8 @@ define(['backbone'], function(Backbone) {
             updatedBy: 'Unknown'
         },
         initialize: function(options) {
-            var defaultDate = new Date(2015,03,10);
-            var date = (defaultDate.getMonth() + 1) + '/' + defaultDate.getDate() + '/' + defaultDate.getFullYear();
+            // var defaultDate = new Date(2015,03,10);
+            // var date = (defaultDate.getMonth() + 1) + '/' + defaultDate.getDate() + '/' + defaultDate.getFullYear();
             //this.set('birthday', date);
         },
         // parse: function(response) {

@@ -42,18 +42,20 @@ app.post('/api/items', function(request, response) {
         title: request.body.title,
         description: request.body.description,
         effectiveDate: request.body.effectiveDate,
-        keywords: request.body.keywords,
+        keywords: [], //request.body.keywords,
         createdDate: new Date(),
-        createdBy: 'Unknown'
+        createdBy: 'Unknown',
+        updatedDate: new Date(),
+        updatedBy: 'Unknown'
     });
     item.save(function(err) {
         if (!err) {
-            return console.log('created');
+            console.log('created');
+            return response.send(item);
         } else {
-            return console.log(err);
+            return console.log("saving ", item, " got error ", err);
         }
     });
-    return response.send(item);
 });
 //get a single item by id
 app.get('/api/items/:id', function(request, response) {
@@ -72,14 +74,16 @@ app.put( '/api/items/:id', function( request, response ) {
         item.title = request.body.title;
         item.description = request.body.description;
         item.effectiveDate = request.body.effectiveDate;
-        item.keywords = request.body.keywords;
+        item.keywords = [];//request.body.keywords;
         item.createdDate = new Date();
         item.createdBy = 'Unknown';
+        item.updatedDate = new Date();
+        item.updatedBy = 'Unknown';
         return item.save( function( err ) {
             if( !err ) {
                 console.log( 'item updated' );
             } else {
-                console.log( err );
+                console.log("updating ", item, " got error ", err);
             }
             return response.send( item );
         });
