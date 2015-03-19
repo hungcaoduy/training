@@ -25,7 +25,6 @@ define(['app', 'marionette', 'tpl!templates/itemRow.html', 'views/addEditItemV']
         showItem: function(e) {
             e.preventDefault();//use to stop default behaviour, e.g link will not work
             e.stopPropagation(); //stop this element's parent to get this event
-            //this.vent.trigger("showItem", this.model);
             this.trigger("showItem", this.model);
         },
         remove: function() {

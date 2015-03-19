@@ -1,5 +1,5 @@
-define(['models/item', 'collections/items', 'views/itemView', 'views/addEditItemV', 'tpl!templates/itemsTable.html'],
-                                function(Item, Items, ItemView, AddItemView, tableTemplate){
+define(['models/item', 'collections/items', 'views/itemView', 'tpl!templates/itemsTable.html'],
+                                function(Item, Items, ItemView, tableTemplate){
     ListView = Marionette.CompositeView.extend({
         tagName: "table",
         className: "table table-hover",
@@ -20,13 +20,13 @@ define(['models/item', 'collections/items', 'views/itemView', 'views/addEditItem
         template: tableTemplate,
         childViewContainer: "tbody",
         initialize: function(options) {
-            this.vent = options.vent;
-            this.on("childview:showItem", this.showItem);
+            // this.vent = options.vent;
+            // this.on("childview:showItem", this.showItem);
             this.on("childview:updateItem", this.updateItem);
 
         },
         showItem: function(childView, item) {
-            this.vent.trigger("childview:showItem", childView, item, this.collection);
+            //this.vent.trigger("childview:showItem", childView, item, this.collection);
             //this.trigger("showItem", childView, item, this.collection);
             console.log("collection view catch the showItem");
         },

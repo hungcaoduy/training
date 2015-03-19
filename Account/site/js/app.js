@@ -3,7 +3,8 @@
 define([
     'marionette',
     'collections/items',
-    'views/itemsCompositeV',//'views/itemsBCompositeV',
+    'views/itemsCompositeV',
+    'views/itemsLayout',
     'views/loginView',
     'views/addEditItemV',//'views/addEditItem', 'views/addItem'
     'models/item',
@@ -13,54 +14,29 @@ define([
     // 'views/Header',
     // 'views/TodoListCompositeView',
     // 'views/Footer'
-], function (Marionette, Items, ItemsView, LoginView, AddItem, Item) {
+], function (Marionette, Items, ItemsView, ItemsLayout, LoginView, AddItem, Item) {
     'use strict';
 
     var app = new Marionette.Application();
-    var items = new Items();
-    var viewOptions = {
-        collection: items
-    };
-
-    // var header = new Header(viewOptions);
-    // var main = new TodoListCompositeView(viewOptions);
-    // var footer = new Footer(viewOptions);
 
     app.addRegions({
         header: '#header',
-        form: '#form',
-        list: '#list',
+        main: '#main',
         footer: '#footer'
     });
 
     app.addInitializer(function () {
-        var vent = _.extend({}, Backbone.Events);
+        //var vent = _.extend({}, Backbone.Events);
         var login = new LoginView();
-        var itemData = {
-            title: 'default title',
-            description: 'Unknown',
-            url: 'Unknown',
-            image: 'img/placeholder.jpg',
-            keywords: 'None',
-            effectiveDate: new Date().getTime(),
-            createdDate: 'Unknown',
-            createdBy: 'Unknown',
-            updatedDate: 'Unknown',
-            updatedBy: 'Unknown'
-        };
-        var addItemForm = new AddItem({model: items.create(itemData), vent: vent});
-        var itemsView = new ItemsView({collection: items, vent: vent});
-        app.header.show(login);
-        app.form.show(addItemForm);
-        $("#effectiveDate").datepicker();
-        items.fetch();
-        app.list.show(itemsView);
+        var itemsLayout = new ItemsLayout();
+        // $("#effectiveDate").datepicker();
 
-        vent.on("childview:showItem", function(childView,item,items) {
-            console.log("app caught ", item);
-            var addItemForm = new AddItem({model: item, vent: vent});
-            app.form.show(addItemForm);
-        });
+        app.header.show(login);
+        app.main.show(itemsLayout);
+
+        // itemsLayout.showChildView('formRegion', addItemForm);
+        // itemsLayout.showChildView('listRegion', itemsView);
+
     });
 
 
