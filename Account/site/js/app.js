@@ -48,7 +48,7 @@ define([
             updatedDate: 'Unknown',
             updatedBy: 'Unknown'
         };
-        var addItemForm = new AddItem({model: items.add(itemData), vent: vent});
+        var addItemForm = new AddItem({model: items.create(itemData), vent: vent});
         var itemsView = new ItemsView({collection: items, vent: vent});
         app.header.show(login);
         app.form.show(addItemForm);
