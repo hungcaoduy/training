@@ -28,7 +28,7 @@ app.listen( port, function() {
 //routes
 //get items
 app.get('/api/items', function(request, response) {
-    return ItemModel.find(function(err, items) {
+    return ItemModel.find(null, null, {skip: 0, limit: 15}, function(err, items) {
         if (!err) {
             return response.send(items);
         } else {

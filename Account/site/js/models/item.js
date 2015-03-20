@@ -21,7 +21,8 @@ define(['backbone'], function(Backbone) {
         //     response.id = response._id;
         //     return response;
         // },
-        idAttribute: '_id'
+        idAttribute: '_id'/*,
+        url: '/api/items',*/
     });
     return Item;
 });

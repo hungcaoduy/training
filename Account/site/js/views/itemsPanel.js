@@ -4,10 +4,14 @@ define(['marionette', 'tpl!templates/itemsPanel.html'], function(Marionette, pan
         initialize: function(options) {
         },
         events: {
-            'click .js-save': "saveItem"
+            'click .js-save': "saveItem",
+            'click .js-mass-delete': "massDelete"
         },
         saveItem: function() {
-            this.triggerMethod("save:click");
+            this.triggerMethod("panel:save:click");
+        },
+        massDelete: function() {
+            this.triggerMethod("panel:mass:delete");
         }
     });
     return ItemsPanelView;

@@ -35,8 +35,22 @@ function(Marionette, layoutTemplate, Items, ItemsView, AddItemView, ItemsPanel){
             this.showChildView('listRegion', itemsView);
             items.fetch();
         },
-        onChildviewSaveClick: function() {
-            this.vent.trigger("save:click");
+        onChildviewPanelSaveClick: function() {
+            //this.vent.trigger("save:click");
+            //console.log(this);
+            var v = this.formRegion.currentView;
+            Marionette.triggerMethodOn(v, "save:new:item", this.listRegion.currentView.collection);
+        },
+        onChildviewPanelMassDelete: function() {
+            var items = this.listRegion.currentView.collection.models;
+            console.log("colletion is being cleaned, records=", items.length);
+            //items.reset();
+            _.each(items, function(item, i, items) {
+                console.log("destroy", i, " ",item);
+                // console.log(i);
+                // console.log(items[i]);
+                if (!item) item.destroy();
+            }, this);
         }
     });
     return ItemsLayout;
