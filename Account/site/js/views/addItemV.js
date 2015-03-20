@@ -12,12 +12,12 @@ define(['marionette', 'tpl!templates/addItem.html', 'models/item'], function(Mar
             console.log("saving data ",data);
             if (!this.model) {
                 console.log("creating new model");
-                this.model = collection.create(data);
+                this.model = collection.add(data);
             } else {
                 console.log("saving existing model");
                 this.model.set(data);
-                this.model.save();
             }
+                this.model.save();
 
             
             console.log(this.model,"saved");
