@@ -11,18 +11,20 @@ define(['marionette', 'tpl!templates/addItem.html', 'models/item'], function(Mar
             var data = Backbone.Syphon.serialize(this);
             console.log("saving data ",data);
             if (!this.model) {
-                this.model = collection.create(new Item(data));
+                console.log("creating new model");
+                this.model = collection.create(data);
             } else {
+                console.log("saving existing model");
                 this.model.set(data);
+                this.model.save();
             }
 
-            this.model.save();
+            
             console.log(this.model,"saved");
-            //duplicated item creation??
         },
         onSaveNewItem: function(collection) {
+            console.log("addView getting the save command, about to save now");
             this.saveItem(collection);
-            console.log("on Save Click");
         }
     });
     return AddItemView;

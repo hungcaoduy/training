@@ -29,13 +29,12 @@ define([
         //var vent = _.extend({}, Backbone.Events);
         var login = new LoginView();
         var itemsLayout = new ItemsLayout();
+
         // $("#effectiveDate").datepicker();
 
         app.header.show(login);
         app.main.show(itemsLayout);
 
-        // itemsLayout.showChildView('formRegion', addItemForm);
-        // itemsLayout.showChildView('listRegion', itemsView);
 
     });
 

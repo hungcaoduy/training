@@ -8,6 +8,7 @@ define(['marionette', 'tpl!templates/itemsPanel.html'], function(Marionette, pan
             'click .js-mass-delete': "massDelete"
         },
         saveItem: function() {
+            console.log("panel save click!");
             this.triggerMethod("panel:save:click");
         },
         massDelete: function() {
