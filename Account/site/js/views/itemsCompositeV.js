@@ -1,5 +1,9 @@
-define(['models/item', 'collections/items', 'views/itemView', 'tpl!templates/itemsTable.html'],
-                                function(Item, Items, ItemView, tableTemplate){
+define([
+    'models/item', 'collections/items', 'views/itemView', 'tpl!templates/itemsTable.html'//,'regions/dialog', 'views/editItemV'
+    ],
+                                function(
+                                    Item, Items, ItemView, tableTemplate//, DialogRegion, EditItemView
+                                    ){
     ListView = Marionette.CompositeView.extend({
         tagName: "table",
         className: "table table-hover",
@@ -32,8 +36,14 @@ define(['models/item', 'collections/items', 'views/itemView', 'tpl!templates/ite
         },
         updateItem: function() {
             this.render();
-        }
-
+        },
+        onChildviewItemviewShowClick: function(childView) {
+            this.trigger("show:item:modal", childView);
+            // console.log("showing childView", childView);
+            // var editView = new EditItemView({model: childView.model});
+            // var modal = new DialogRegion();
+            // modal.show(editView);
+        },
     });
     return ListView;
 });

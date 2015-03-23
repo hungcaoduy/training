@@ -6,23 +6,22 @@ define([
     'views/itemsCompositeV',
     'views/itemsLayout',
     'views/loginView',
-    'views/addEditItemV',//'views/addEditItem', 'views/addItem'
-    'models/item',
     'jquery-dateFormat',
     'jquery-ui',
     'syphon'
     // 'views/Header',
     // 'views/TodoListCompositeView',
     // 'views/Footer'
-], function (Marionette, Items, ItemsView, ItemsLayout, LoginView, AddItem, Item) {
+], function (Marionette, Items, ItemsView, ItemsLayout, LoginView) {
     'use strict';
 
     var app = new Marionette.Application();
 
     app.addRegions({
-        header: '#header',
-        main: '#main',
-        footer: '#footer'
+        header: '#header-region',
+        main: '#main-region',
+        footer: '#footer-region'/*,
+        dialog: 'dialog-region'*/
     });
 
     app.addInitializer(function () {

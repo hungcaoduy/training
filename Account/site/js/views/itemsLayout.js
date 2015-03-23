@@ -3,14 +3,17 @@ define(['marionette',
     'collections/items',
     'views/itemsCompositeV',
     'views/addItemV',
-    'views/itemsPanel'],
-function(Marionette, layoutTemplate, Items, ItemsView, AddItemView, ItemsPanel){
+    'views/itemsPanel',
+    'views/editItemV',
+    'regions/dialog'],
+function(Marionette, layoutTemplate, Items, ItemsView, AddItemView, ItemsPanel, EditItemView, DialogRegion){
     ItemsLayout = Marionette.LayoutView.extend({
         template: layoutTemplate,
         regions: {
             formRegion: "#form-region",
             panelRegion: "#panel-region",
-            listRegion: "#list-region"
+            listRegion: "#list-region",
+            dialogRegion: DialogRegion.extend({el:'#dialog-region'})
         },
         onBeforeShow: function() {
             var items = new Items();
@@ -34,6 +37,7 @@ function(Marionette, layoutTemplate, Items, ItemsView, AddItemView, ItemsPanel){
             this.showChildView('panelRegion', new ItemsPanel());
             this.showChildView('listRegion', itemsView);
             items.fetch();
+            this.listenTo(itemsView, "show:item:modal", this.showItemModal);
         },
         onChildviewPanelSaveClick: function() {
             //this.vent.trigger("save:click");
@@ -52,6 +56,21 @@ function(Marionette, layoutTemplate, Items, ItemsView, AddItemView, ItemsPanel){
                 // console.log(items[i]);
                 if (!item) item.destroy();
             }, this);
+        },
+        onChildviewShowItemModal: function() {
+            console.log("Why does not this fired");
+        },
+        showItemModal: function(childView, args) {
+            console.log("showing childView", childView);
+            var editView = new EditItemView({model: childView.model});
+            this.listenTo(editView, 'item:update', this.updateList);
+            //var modal = new DialogRegion();
+            //modal.show(editView);
+            this.showChildView('dialogRegion', editView);
+        },
+        updateList: function() {
+            console.log("please update list");
+            Marionette.triggerMethodOn(this.listRegion.currentView, 'childview:updateItem');
         }
     });
     return ItemsLayout;

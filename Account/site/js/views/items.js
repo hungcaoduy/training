@@ -1,4 +1,4 @@
-define(['models/item', 'collections/items', 'views/item', 'views/addEditItem'],
+define(['models/item', 'collections/items', 'views/item', 'views/editItemV'],
     function(Item, Items, ItemView, AddItemView){
     ListView = Backbone.View.extend({
         el: '#list',

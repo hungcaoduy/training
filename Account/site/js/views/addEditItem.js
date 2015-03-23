@@ -1,4 +1,4 @@
-define(['backbone', 'text!templates/addEdititem.html'], function(Backbone, itemTemplate) {
+define(['backbone', 'text!templates/editItem.html'], function(Backbone, itemTemplate) {
     var ItemView = Backbone.View.extend({
         tagName: 'div',
         template: _.template(itemTemplate),
