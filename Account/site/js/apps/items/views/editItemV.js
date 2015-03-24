@@ -1,4 +1,4 @@
-define(['marionette', 'tpl!itemManager/templates/editItem.html'], function(Marionette, itemTemplate) {
+define(['marionette', 'tpl!items/templates/editItem.html'], function(Marionette, itemTemplate) {
     var EditItemView = Marionette.ItemView.extend({
         template: itemTemplate,
         initialize: function(options) {

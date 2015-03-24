@@ -1,4 +1,4 @@
-define(['backbone', 'itemManager/models/item'],function(Backbone, Item){
+define(['backbone', 'items/models/item'],function(Backbone, Item){
     Items = Backbone.Collection.extend({
         model: Item,
         url: '/api/items',

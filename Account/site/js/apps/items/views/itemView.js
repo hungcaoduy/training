@@ -1,4 +1,4 @@
-define(['marionette', 'tpl!itemManager/templates/itemRow.html'],
+define(['marionette', 'tpl!items/templates/itemRow.html'],
                     function(Marionette, itemTemplate) {
     var ItemView = Marionette.ItemView.extend({
         tagName: 'tr',
