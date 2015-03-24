@@ -1,4 +1,4 @@
-define(['marionette', 'tpl!templates/addItem.html', 'models/item'], function(Marionette, itemTemplate, Item) {
+define(['marionette', 'tpl!itemManager/templates/addItem.html', 'itemManager/models/item'], function(Marionette, itemTemplate, Item) {
     var AddItemView = Marionette.ItemView.extend({
         template: itemTemplate,
         initialize: function(options) {
@@ -19,7 +19,7 @@ define(['marionette', 'tpl!templates/addItem.html', 'models/item'], function(Mar
             }
                 this.model.save();
 
-            
+
             console.log(this.model,"saved");
         },
         onSaveNewItem: function(collection) {

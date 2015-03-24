@@ -1,4 +1,4 @@
-define(['marionette', 'tpl!templates/itemsPanel.html'], function(Marionette, panelTemplate) {
+define(['marionette', 'tpl!itemManager/templates/itemsPanel.html'], function(Marionette, panelTemplate) {
     var ItemsPanelView = Marionette.ItemView.extend({
         template: panelTemplate,
         initialize: function(options) {

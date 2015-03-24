@@ -1,5 +1,5 @@
-define(['app', 'marionette'],
-                    function(app, Marionette) {
+define(['marionette'],
+                    function(Marionette) {
     var DialogRegion = Marionette.Region.extend({
         el: '#dialog-region',
         onShow: function(view) {

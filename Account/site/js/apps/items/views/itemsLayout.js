@@ -1,10 +1,10 @@
 define(['marionette',
-    'tpl!templates/itemsLayout.html',
-    'collections/items',
-    'views/itemsCompositeV',
-    'views/addItemV',
-    'views/itemsPanel',
-    'views/editItemV',
+    'tpl!itemManager/templates/itemsLayout.html',
+    'itemManager/collections/items',
+    'itemManager/views/itemsCompositeV',
+    'itemManager/views/addItemV',
+    'itemManager/views/itemsPanel',
+    'itemManager/views/editItemV',
     'regions/dialog'],
 function(Marionette, layoutTemplate, Items, ItemsView, AddItemView, ItemsPanel, EditItemView, DialogRegion){
     ItemsLayout = Marionette.LayoutView.extend({

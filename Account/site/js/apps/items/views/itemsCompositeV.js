@@ -1,5 +1,5 @@
 define([
-    'models/item', 'collections/items', 'views/itemView', 'tpl!templates/itemsTable.html'//,'regions/dialog', 'views/editItemV'
+    'itemManager/models/item', 'itemManager/collections/items', 'itemManager/views/itemView', 'tpl!itemManager/templates/itemsTable.html'//,'regions/dialog', 'views/editItemV'
     ],
                                 function(
                                     Item, Items, ItemView, tableTemplate//, DialogRegion, EditItemView

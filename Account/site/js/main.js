@@ -1,48 +1,3 @@
-/*require.config({
-    baseUrl: "js",
-    paths: {
-        'underscore': 'lib/underscore',
-        'backbone': 'lib/backbone',
-        'marionette': 'lib/backbone.marionette',
-        'jquery': 'lib/jquery',
-        'jquery-dateFormat': 'lib/jquery-dateFormat',
-        'jquery-ui': 'lib/jquery-ui',
-        'text': 'lib/text',
-        'bootstrap': '//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min',
-        'modalview': 'lib/Backbone.ModalDialog'
-    },
-    shim: {
-        // 'underscore': {
-        //     exports: '_'
-        // },
-        'backbone': {
-            deps: ['underscore', 'jquery'],
-            exports: 'Backbone'
-        },
-        'marionette': {
-            deps: 'backbone',
-            exports: 'Backbone.Marionette'
-        },
-        // 'jquery': {
-        //     exports: '$'
-        // },
-        'jquery-dateFormat': {
-            deps: ['jquery']
-        },
-        'jquery-ui': {
-            deps: ['jquery']
-        },
-        'bootstrap': {
-            deps: ['jquery']
-        },
-        'modalview': {
-            deps: ['backbone'],
-            exports: 'ModalView'
-        }
-    },
-    deps: ['jquery', 'underscore']
-});*/
-
 require.config({
     paths: {
         'underscore': 'lib/underscore',
@@ -53,7 +8,9 @@ require.config({
         'tpl': 'lib/underscore-tpl',
         'jquery-dateFormat': 'lib/jquery-dateFormat',
         'jquery-ui': 'lib/jquery-ui',
-        'syphon': 'lib/backbone.syphon'
+        'syphon': 'lib/backbone.syphon',
+        'itemManager': 'apps/items',
+        'itemManagerApp': 'apps/items/itemManagerApp'
     },
     shim: {
         underscore: {
@@ -85,12 +42,11 @@ require.config({
 
 
 require([
-    'app',
+    'itemManagerApp',
     'backbone',
     'routers/router',
-    'controllers/controller',
-    'views/items'
-], function (app, Backbone, Router, Controller, ItemsView) {
+    'controllers/controller'
+], function (app, Backbone, Router, Controller) {
     'use strict';
 
     app.start();
@@ -99,8 +55,3 @@ require([
     Backbone.history.start();
 });
 
-
-/*define([],function(){
-
-});
-*/

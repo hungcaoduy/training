@@ -2,17 +2,16 @@
 
 define([
     'marionette',
-    'collections/items',
-    'views/itemsCompositeV',
-    'views/itemsLayout',
-    'views/loginView',
+    'itemManager/collections/items',
+    'itemManager/views/itemsCompositeV',
+    'itemManager/views/itemsLayout',
     'jquery-dateFormat',
     'jquery-ui',
     'syphon'
     // 'views/Header',
     // 'views/TodoListCompositeView',
     // 'views/Footer'
-], function (Marionette, Items, ItemsView, ItemsLayout, LoginView) {
+], function (Marionette, Items, ItemsView, ItemsLayout) {
     'use strict';
 
     var app = new Marionette.Application();
@@ -26,12 +25,10 @@ define([
 
     app.addInitializer(function () {
         //var vent = _.extend({}, Backbone.Events);
-        var login = new LoginView();
         var itemsLayout = new ItemsLayout();
 
         // $("#effectiveDate").datepicker();
 
-        app.header.show(login);
         app.main.show(itemsLayout);
 
 

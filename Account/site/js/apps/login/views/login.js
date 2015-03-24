@@ -1,4 +1,4 @@
-define(['backbone','modalview', 'text!templates/login.html'], function(Backbone,ModalView, loginTemplate) {
+define(['backbone', 'text!templates/login.html'], function(Backbone, loginTemplate) {
     var LoginView = Backbone.View.extend({
         tagName: 'div',
         template: _.template(loginTemplate),

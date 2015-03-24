@@ -1,6 +1,6 @@
 /*global define */
 define([
-    'app'
+    'itemManagerApp'
 ], function (app) {
     'use strict';
 
