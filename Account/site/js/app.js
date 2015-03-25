@@ -15,7 +15,7 @@ define(["marionette", "apps/config/marionette/regions/dialog"], function(Marione
     };
 
     App.getCurrentRoute = function(){
-        return Backbone.history.fragment
+        return Backbone.history.fragment;
     };
 
     App.startSubApp = function(appName, args){
@@ -36,10 +36,10 @@ define(["marionette", "apps/config/marionette/regions/dialog"], function(Marione
         if(Backbone.history){
             require(["apps/items/itemsApp"], function () {
                 Backbone.history.start();
-
-                // if(App.getCurrentRoute() === ""){
-                //     App.trigger("contacts:list");
-                // }
+                console.log("app starting, current route is ", App.getCurrentRoute() || "Default");
+                if(App.getCurrentRoute() === ""){
+                    App.trigger("items:list");
+                }
             });
             /*require(["apps/contacts/contactsApp", "apps/about/about_app"], function () {
                 Backbone.history.start();
@@ -48,7 +48,7 @@ define(["marionette", "apps/config/marionette/regions/dialog"], function(Marione
                     App.trigger("contacts:list");
                 }
             });*/
-    
+
         }
     });
 
