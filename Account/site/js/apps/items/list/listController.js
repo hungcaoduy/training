@@ -14,8 +14,8 @@ define([
                         var itemList = new View.Items({collection: items});
 
                         itemList.on('childview:item:show', function(childView, args) {
-                            //App.trigger('')
-                            console.log("trying to show item, should be trigger up");
+                            console.log("Triggering up the item:show to App");
+                            App.trigger('item:show', args.model.get('id'));
                         });
 
                         App.mainRegion.show(itemList);

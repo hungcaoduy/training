@@ -30,7 +30,7 @@ define(['app'], function(App) {
             },
             showItem: function(id) {
                 console.log('itemsApp API.showItem');
-                require(['apps/item/show/showController'], function(showController) {
+                require(['apps/items/show/showController'], function(showController) {
                     executeAction(showController.showItem, id);
                 });
             },
@@ -69,6 +69,12 @@ define(['app'], function(App) {
             console.log('App.on:items:list');
             App.navigate('items');
             API.listItems();
+        });
+
+        App.on('item:show', function(id) {
+            console.log('handle item:show in itemsApp');
+            App.navigate('items/' + id);
+            API.showItem(id);
         });
 
         App.addInitializer(function() {
