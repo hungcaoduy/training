@@ -12,6 +12,12 @@ define([
                     $.when(fetchingItems).done(function(items){
                         console.log("items.length=", (items || "-").length);
                         var itemList = new View.Items({collection: items});
+
+                        itemList.on('childview:item:show', function(childView, args) {
+                            //App.trigger('')
+                            console.log("trying to show item, should be trigger up");
+                        });
+
                         App.mainRegion.show(itemList);
                     });
                 });
