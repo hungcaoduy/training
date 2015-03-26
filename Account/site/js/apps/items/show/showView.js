@@ -5,7 +5,10 @@ define(['app', 'tpl!items/show/templates/showItem.tpl', 'tpl!items/show/template
         });
 
         View.Item = Marionette.ItemView.extend({
-            template: ShowItemTpl
+            template: ShowItemTpl,
+            triggers: {
+                'click .js-edit': 'item:edit'
+            }
         });
     });
 

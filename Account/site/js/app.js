@@ -52,5 +52,6 @@ define(["marionette", "apps/config/marionette/regions/dialog"], function(Marione
         }
     });
 
+    //App.isOffline = true;
     return App;
 });

@@ -1,14 +1,15 @@
 require.config({
+    waitSeconds: 10,
     paths: {
         'underscore': 'lib/underscore',
         'backbone': 'lib/backbone',
         'marionette': 'lib/backbone.marionette',
         'jquery': 'lib/jquery',
-        "backbone.picky": "lib/backbone.picky",
-        json2: "lib/json2",
-        localstorage: "lib/backbone.localstorage",
-        spin: "lib/spin",
-        "spin.jquery": "lib/spin.jquery",
+        'backbone.picky': 'lib/backbone.picky',
+        'json2': 'lib/json2',
+        'localstorage': 'lib/backbone.localstorage',
+        'spin': 'lib/spin',
+        'spin.jquery': 'lib/spin.jquery',
         'text': 'lib/text',
         'tpl': 'lib/underscore-tpl',
         'jquery-dateFormat': 'lib/jquery-dateFormat',
@@ -41,9 +42,9 @@ require.config({
         'syphon': {
             deps: ['backbone']
         },
-        localstorage: ["backbone"],
-        "spin.jquery": ["spin", "jquery"],
-        "backbone.picky": ["backbone"]
+        localstorage: ['backbone'],
+        'spin.jquery': ['spin', 'jquery'],
+        'backbone.picky': ['backbone']
     },
     deps: ['jquery', 'underscore']
 });

@@ -9,17 +9,45 @@ define([
                 require(['entities/item'], function() {
                     console.log("ItemsApp.List ListItem");
                     var fetchingItems = App.reqres.request("item:entities");
-                    $.when(fetchingItems).done(function(items){
-                        console.log("items.length=", (items || "-").length);
-                        var itemList = new View.Items({collection: items});
+                    var layoutView = new View.Layout();
+                    var panelView = new View.Panel();
 
-                        itemList.on('childview:item:show', function(childView, args) {
+                    panelView.on('panel:new:item', function() {
+                        console.log("about to add new item");
+                        App.trigger('item:new');
+                    });
+
+                    App.mainRegion.show(layoutView);
+                    layoutView.showChildView('panelRegion', panelView);
+
+                    $.when(fetchingItems).done(function(items){
+
+                        var itemListView = new View.Items({collection: items});
+
+                        itemListView.on('childview:item:show', function(childView, args) {
                             console.log("Triggering up the item:show to App");
-                            App.trigger('item:show', args.model.get('id'));
+                            App.trigger('item:show', childView.model.id);
                         });
 
-                        App.mainRegion.show(itemList);
+                        itemListView.on('childview:item:edit', function(childView, args) {
+                            console.log("Triggering up the item:edit to App");
+                            App.trigger('item:edit', childView.model.id);
+                        });
+
+                        itemListView.on('childview:item:delete', function(childView, args) {
+                            console.log('removing item ', args.model.get('title'));
+                            args.model.destroy();
+                        });
+
+                        layoutView.showChildView('listRegion', itemListView);
                     });
+                });
+            },
+            newItem: function() {
+                console.log('now we actually new');
+                require(['apps/items/new/newView'], function(NewItemView) {
+                    var newItemView = new NewItemView();
+                    App.dialogRegion.show(newItemView);
                 });
             }
         };

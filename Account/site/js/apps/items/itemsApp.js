@@ -18,7 +18,8 @@ define(['app'], function(App) {
             appRoutes: {
                 'items': 'listItems',
                 'items/:id': 'showItem',
-                'items/:id/edit': 'editItem'
+                'items/:id/edit': 'editItem',
+                'items/new': 'newItem'
             }
         });
         var API = {
@@ -35,7 +36,16 @@ define(['app'], function(App) {
                 });
             },
             editItem: function(id) {
-                console.log('itemsApp API.showItem');
+                console.log('itemsApp API.editItem');
+                require(['apps/items/edit/editController'], function(editController) {
+                    executeAction(editController.editItem, id);
+                });
+            },
+            newItem: function() {
+                console.log('itemsApp API.newItem');
+                require(['items/list/listController'], function(ListController) {
+                    executeAction(ListController.newItem);
+                });
             }
         };
 
@@ -44,26 +54,6 @@ define(['app'], function(App) {
             action(arg);
             //App.execute('set:active:header', 'items');
         };
-
-        /*var API = {
-            listContacts: function(criterion){
-                require(['apps/contacts/list/list_controller'], function(ListController){
-                    executeAction(ListController.listContacts, criterion);
-                });
-            },
-
-            showContact: function(id){
-                require(['apps/contacts/show/show_controller'], function(ShowController){
-                    executeAction(ShowController.showContact, id);
-                });
-            },
-
-            editContact: function(id){
-                require(['apps/contacts/edit/edit_controller'], function(EditController){
-                    executeAction(EditController.editContact, id);
-                });
-            }
-        };*/
 
         App.on('items:list', function() {
             console.log('App.on:items:list');
@@ -75,6 +65,18 @@ define(['app'], function(App) {
             console.log('handle item:show in itemsApp');
             App.navigate('items/' + id);
             API.showItem(id);
+        });
+
+        App.on('item:edit', function(id) {
+            console.log('handle item:edit in itemsApp');
+            App.navigate('items/' + id + '/edit');
+            API.editItem(id);
+        });
+
+        App.on('item:new', function() {
+            console.log('handle item:new in itemsApp');
+            App.navigate('items/new');
+            API.newItem();
         });
 
         App.addInitializer(function() {
