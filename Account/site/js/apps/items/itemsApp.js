@@ -52,7 +52,7 @@ define(['app'], function(App) {
         var executeAction = function(action, arg){
             App.startSubApp('ItemsApp');
             action(arg);
-            //App.execute('set:active:header', 'items');
+            App.execute('set:active:header', 'items');
         };
 
         App.on('items:list', function() {

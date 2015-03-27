@@ -29,7 +29,7 @@ define(["app", "apps/contacts/show/show_view"], function(ContactManager, View){
           });
         });
       }
-    }
+    };
   });
 
   return ContactManager.ContactsApp.Show.Controller;

@@ -4,6 +4,7 @@ define(["app", "backbone.picky"], function(App){
       initialize: function(){
         var selectable = new Backbone.Picky.Selectable(this);
         _.extend(this, selectable);
+        // Backbone.Picky.Selectable(this);
       }
     });
 
@@ -19,6 +20,7 @@ define(["app", "backbone.picky"], function(App){
     var initializeHeaders = function(){
       Entities.headers = new Entities.HeaderCollection([
         { name: "Contacts", url: "contacts", navigationTrigger: "contacts:list" },
+        { name: "Items", url: "items", navigationTrigger: "items:list" },
         { name: "About", url: "about", navigationTrigger: "about:show" }
       ]);
     };

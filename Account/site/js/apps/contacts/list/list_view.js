@@ -59,8 +59,8 @@ define(["app",
         var $view = this.$el;
         $view.hide().toggleClass(cssClass).fadeIn(800, function(){
           setTimeout(function(){
-            $view.toggleClass(cssClass)
-          }, 500);
+            $view.toggleClass(cssClass);
+        }, 500);
         });
       },
 

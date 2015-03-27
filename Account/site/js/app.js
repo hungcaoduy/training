@@ -1,11 +1,11 @@
-define(["marionette", "apps/config/marionette/regions/dialog"], function(Marionette){
+define(['marionette', 'apps/config/marionette/regions/dialog'], function(Marionette){
     var App = new Marionette.Application();
 
     App.addRegions({
-        headerRegion: "#header-region",
-        mainRegion: "#main-region",
+        headerRegion: '#header-region',
+        mainRegion: '#main-region',
         dialogRegion: Marionette.Region.Dialog.extend({
-            el: "#dialog-region"
+            el: '#dialog-region'
         })
     });
 
@@ -23,7 +23,7 @@ define(["marionette", "apps/config/marionette/regions/dialog"], function(Marione
         if (App.currentApp === currentApp){ return; }
 
         if (App.currentApp){
-            App.currentApp.stop();
+            //App.currentApp.stop();
         }
 
         App.currentApp = currentApp;
@@ -32,26 +32,22 @@ define(["marionette", "apps/config/marionette/regions/dialog"], function(Marione
         }
     };
 
-    App.on("start", function(){
+    App.on('start', function(){
         if(Backbone.history){
-            require(["apps/items/itemsApp"], function () {
+            require(['apps/items/itemsApp',
+                'apps/about/about_app',
+                'apps/header/header_app',
+                'apps/contacts/contacts_app'
+                ], function () {
                 Backbone.history.start();
-                console.log("app starting, current route is ", App.getCurrentRoute() || "Default");
-                if(App.getCurrentRoute() === ""){
-                    App.trigger("items:list");
+                console.log('I want to start headerApp');
+                App.HeaderApp.start();
+                console.log('app starting, current route is ', App.getCurrentRoute() || 'Default');
+                if(App.getCurrentRoute() === ''){
+                    App.trigger('items:list');
                 }
             });
-            /*require(["apps/contacts/contactsApp", "apps/about/about_app"], function () {
-                Backbone.history.start();
-
-                if(App.getCurrentRoute() === ""){
-                    App.trigger("contacts:list");
-                }
-            });*/
-
         }
     });
-
-    //App.isOffline = true;
     return App;
 });
