@@ -23,7 +23,7 @@ define(['marionette', 'apps/config/marionette/regions/dialog'], function(Marione
         if (App.currentApp === currentApp){ return; }
 
         if (App.currentApp){
-            //App.currentApp.stop();
+            App.currentApp.stop();
         }
 
         App.currentApp = currentApp;
@@ -36,13 +36,14 @@ define(['marionette', 'apps/config/marionette/regions/dialog'], function(Marione
         if(Backbone.history){
             require(['apps/items/itemsApp',
                 'apps/about/about_app',
-                'apps/header/header_app',
+                // 'apps/header/header_app',
+                // 'apps/myheader/myheaderApp',
                 'apps/contacts/contacts_app'
                 ], function () {
                 Backbone.history.start();
-                console.log('I want to start headerApp');
-                App.HeaderApp.start();
+
                 console.log('app starting, current route is ', App.getCurrentRoute() || 'Default');
+
                 if(App.getCurrentRoute() === ''){
                     App.trigger('items:list');
                 }

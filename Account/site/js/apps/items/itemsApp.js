@@ -24,19 +24,16 @@ define(['app'], function(App) {
         });
         var API = {
             listItems: function(criterion) {
-                console.log('itemsApp API.listItems');
                 require(['items/list/listController'], function(ListController) {
                     executeAction(ListController.listItems, criterion);
                 });
             },
             showItem: function(id) {
-                console.log('itemsApp API.showItem');
                 require(['apps/items/show/showController'], function(showController) {
                     executeAction(showController.showItem, id);
                 });
             },
             editItem: function(id) {
-                console.log('itemsApp API.editItem');
                 require(['apps/items/edit/editController'], function(editController) {
                     executeAction(editController.editItem, id);
                 });
@@ -85,7 +82,7 @@ define(['app'], function(App) {
             });
         });
 
-        return ItemsAppRouter.Router;
     });
+    return App.ItemsAppRouter;
 
 });

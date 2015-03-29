@@ -1,4 +1,4 @@
-require.config({
+/*require.config({
     waitSeconds: 10,
     paths: {
         'backbone': 'lib/backbone',
@@ -47,11 +47,54 @@ require.config({
         'backbone.picky': ['backbone']
     },
     deps: ['jquery', 'underscore']
+});*/
+
+requirejs.config({
+  baseUrl: "js",
+  paths: {
+    backbone: "lib/backbone",
+    "backbone.picky": "lib/backbone.picky",
+    "backbone.syphon": "lib/backbone.syphon",
+    jquery: "lib/jquery",
+    'jquery-dateFormat': 'lib/jquery-dateFormat',
+    "jquery-ui": "lib/jquery-ui",
+    json2: "lib/json2",
+    localstorage: "lib/backbone.localstorage",
+    marionette: "lib/backbone.marionette",
+    spin: "lib/spin",
+    "spin.jquery": "lib/spin.jquery",
+    text: "lib/text",
+    tpl: "lib/underscore-tpl",
+    underscore: "lib/underscore",
+    'items': 'apps/items',
+    'header': 'apps/myheader'
+  },
+
+  shim: {
+    underscore: {
+      exports: "_"
+    },
+    backbone: {
+      deps: ["jquery", "underscore", "json2"],
+      exports: "Backbone"
+    },
+    "backbone.picky": ["backbone"],
+    "backbone.syphon": ["backbone"],
+    marionette: {
+      deps: ["backbone"],
+      exports: "Marionette"
+    },
+    "jquery-ui": ["jquery"],
+    localstorage: ["backbone"],
+    "spin.jquery": ["spin", "jquery"],
+    tpl: ["text"]
+  }
 });
 
-
 require([
-    'app'
+    'app',
+    //'header/header_app'
+    'header/myheaderApp'
 ], function (App) {
     'use strict';
 

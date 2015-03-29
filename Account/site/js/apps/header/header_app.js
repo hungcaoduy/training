@@ -1,6 +1,5 @@
 define(['app', 'apps/header/list/list_controller'], function(App, ListController){
     App.module('HeaderApp', function(HeaderApp, App, Backbone, Marionette, $, _){
-        HeaderApp.startWithParent = false;
 
         HeaderApp.onStart = function() {
             console.log('header is onStart');

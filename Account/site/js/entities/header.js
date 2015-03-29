@@ -4,7 +4,6 @@ define(["app", "backbone.picky"], function(App){
       initialize: function(){
         var selectable = new Backbone.Picky.Selectable(this);
         _.extend(this, selectable);
-        // Backbone.Picky.Selectable(this);
       }
     });
 

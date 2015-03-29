@@ -25,8 +25,8 @@ define(['app', 'apps/header/list/list_view'], function(App, View){
                     console.log('links:', links);
                     var headerToSelect = links.find(function(header){ return header.get('url') === headerUrl; });
                     console.log('headerToSelect', headerToSelect);
-                    //headerToSelect.select();
-                    links.select(headerToSelect);
+                    headerToSelect.select();
+                    // links.select(headerToSelect);
                     links.trigger('reset');
                 });
             }

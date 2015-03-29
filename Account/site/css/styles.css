@@ -472,3 +472,9 @@ form.signin input::-webkit-input-placeholder {
 .button:hover {
   background: #ddd;
 }
+
+
+/*manually updated*/
+body {
+  padding-top: 60px; /* 60px to make the container make room for the navigation bar */
+}
