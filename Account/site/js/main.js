@@ -65,6 +65,7 @@ requirejs.config({
     "spin.jquery": "lib/spin.jquery",
     text: "lib/text",
     tpl: "lib/underscore-tpl",
+    // underscore: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore",
     underscore: "lib/underscore",
     'items': 'apps/items',
     'header': 'apps/myheader'
