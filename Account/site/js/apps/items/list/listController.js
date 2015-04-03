@@ -1,6 +1,7 @@
 define([
     'app',
-    'items/list/listView'
+    'items/list/listView',
+    'entities/common'
     ], function(App, View) {
 
     App.module("ItemsApp.List", function(List, App, Backbone, Marionette, $, _) {
@@ -21,8 +22,19 @@ define([
                     layoutView.showChildView('panelRegion', panelView);
 
                     $.when(fetchingItems).done(function(items){
-
-                        var itemListView = new View.Items({collection: items});
+                        var filteredItems = new App.Entities.FilteredCollection({
+                            collection: items,
+                            filterFunction: function(filterCriterion) {
+                                var criterion = filterCriterion.toLowerCase();
+                                return function (item) {
+                                    if (item.get("title").toLowerCase().indexOf(criterion) !== -1 ||
+                                        item.get("description").toLowerCase().indexOf(criterion) !== -1) {
+                                        return item;
+                                    }
+                                };
+                            }
+                        });
+                        var itemListView = new View.Items({collection: filteredItems});
 
                         itemListView.on('childview:item:show', function(childView, args) {
                             console.log("Triggering up the item:show to App");
@@ -37,6 +49,11 @@ define([
                         itemListView.on('childview:item:delete', function(childView, args) {
                             console.log('removing item ', args.model.get('title'));
                             args.model.destroy();
+                        });
+
+                        panelView.on('panel:item:filter', function(criterion) {
+                            filteredItems.filter(criterion);
+                            console.log('items is filtered');
                         });
 
                         layoutView.showChildView('listRegion', itemListView);

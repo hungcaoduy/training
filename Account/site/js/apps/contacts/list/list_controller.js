@@ -18,9 +18,9 @@ define(["app", "apps/contacts/list/list_view"], function(ContactManager, View){
                 filterFunction: function(filterCriterion){
                   var criterion = filterCriterion.toLowerCase();
                   return function(contact){
-                    if(contact.get('firstName').toLowerCase().indexOf(criterion) !== -1
-                      || contact.get('lastName').toLowerCase().indexOf(criterion) !== -1
-                      || contact.get('phoneNumber').toLowerCase().indexOf(criterion) !== -1){
+                    if(contact.get('firstName').toLowerCase().indexOf(criterion) !== -1 ||
+                      contact.get('lastName').toLowerCase().indexOf(criterion) !== -1 ||
+                      contact.get('phoneNumber').toLowerCase().indexOf(criterion) !== -1){
                         return contact;
                     }
                   };
