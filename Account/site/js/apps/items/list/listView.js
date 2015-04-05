@@ -4,7 +4,8 @@ define([
     'tpl!items/list/templates/itemTable.tpl',
     'tpl!items/list/templates/panel.tpl',
     'tpl!items/list/templates/layout.tpl',
-    'jquery-ui', 'jquery-dateFormat', 'apps/config/marionette/regions/dialog'
+    'jquery-ui', 'jquery-dateFormat', 'apps/config/marionette/regions/dialog',
+    'backgrid.paginator'
     ], function(App, ItemRowTpl, ItemTableTpl, PanelTpl, LayoutTpl) {
 
     App.module('ItemsApp.List.View', function(View, App, Backbone, Marionette, $, _) {
@@ -39,6 +40,21 @@ define([
             template: ItemTableTpl,
             childView: View.Item,
             childViewContainer: 'tbody',
+            ui: {
+                paginator: '.ja-paginator'
+            },
+            onRenderCollection: function() {
+                this.showPaginator(this.collection);
+            },
+            showPaginator: function(collection) {
+                var paginator = new Backgrid.Extension.Paginator({
+                    collection: collection
+                });
+                this.ui.paginator.empty();
+                if (collection.length>0) {
+                    this.ui.paginator.append(paginator.render().$el);
+                }
+            }
         });
 
         View.Panel = Marionette.ItemView.extend({

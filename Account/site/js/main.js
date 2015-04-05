@@ -67,6 +67,9 @@ requirejs.config({
     tpl: "lib/underscore-tpl",
     // underscore: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore",
     underscore: "lib/underscore",
+    "backbone.paginator": "lib/backbone.paginator",
+    'backgrid': 'lib/backgrid',
+    'backgrid.paginator': 'lib/backgrid-paginator',
     'items': 'apps/items',
     'header': 'apps/myheader'
   },
@@ -88,7 +91,17 @@ requirejs.config({
     "jquery-ui": ["jquery"],
     localstorage: ["backbone"],
     "spin.jquery": ["spin", "jquery"],
-    tpl: ["text"]
+    tpl: ["text"],
+    'backgrid': {
+      deps: [
+        'backbone'
+      ]
+    },
+    'backgrid.paginator': {
+      deps: [
+        'backgrid'
+      ]
+    }
   }
 });
 

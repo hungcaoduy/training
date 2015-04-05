@@ -5,7 +5,9 @@
     return ;
 });*/
 
-define(['app', 'apps/config/options', 'apps/config/storage/localstorage'
+define(['app', 'apps/config/options', 
+    'apps/config/storage/localstorage',
+    'backbone.paginator'
     ], function(App, Options) {
     App.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
         Entities.Item = Backbone.Model.extend({
@@ -28,10 +30,38 @@ define(['app', 'apps/config/options', 'apps/config/storage/localstorage'
             urlRoot: Options.itemUrl()
         });
 
-        Entities.ItemCollection = Backbone.Collection.extend({
+        Entities.ItemCollection = Backbone.PageableCollection.extend({
             model: Entities.Item,
             url: Options.itemUrl(),
-            comparator: 'title'
+            comparator: 'title',
+            mode: 'client',
+            state: {
+                firstPage: 0,
+                pageSize: 2,
+                currentPage: 0
+            },
+            hasPrevious: function() {
+                return this.hasPreviousPage();
+            },
+
+            hasNext: function() {
+                return this.hasNextPage();
+            },
+
+            // Get total records
+            parseState: function(res) {
+                return {
+                totalRecords: res.totalEntries
+                };
+            },
+
+            // Get data of page that we want to get
+            parseRecords: function(res) {
+                var results = res.results || [];
+
+                return results;
+            }
+
         });
 
         if (Options.isOffline) {
