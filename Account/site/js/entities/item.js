@@ -53,14 +53,14 @@ define(['app', 'apps/config/options',
                 return {
                 totalRecords: res.totalEntries
                 };
-            },
+            }/*,
 
             // Get data of page that we want to get
             parseRecords: function(res) {
                 var results = res.results || [];
 
                 return results;
-            }
+            }*/
 
         });
 

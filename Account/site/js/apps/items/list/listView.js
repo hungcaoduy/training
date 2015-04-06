@@ -41,7 +41,7 @@ define([
             childView: View.Item,
             childViewContainer: 'tbody',
             ui: {
-                paginator: '.ja-paginator'
+                paginator: '.js-paginator'
             },
             onRenderCollection: function() {
                 this.showPaginator(this.collection);
@@ -52,6 +52,7 @@ define([
                 });
                 this.ui.paginator.empty();
                 if (collection.length>0) {
+                    console.log("paginator", this.ui.paginator, collection.length);
                     this.ui.paginator.append(paginator.render().$el);
                 }
             }

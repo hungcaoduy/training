@@ -34,7 +34,8 @@ define([
                                 };
                             }
                         });
-                        var itemListView = new View.Items({collection: filteredItems});
+                        // var itemListView = new View.Items({collection: filteredItems});
+                        var itemListView = new View.Items({collection: items});
 
                         itemListView.on('childview:item:show', function(childView, args) {
                             console.log("Triggering up the item:show to App");

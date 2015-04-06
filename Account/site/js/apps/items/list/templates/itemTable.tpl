@@ -9,4 +9,4 @@
  </thead>
  <tbody></tbody>
 </table>
-<div class="js-paginator"></div>
+<div class="js-paginator container-fluid"></div>
