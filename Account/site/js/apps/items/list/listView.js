@@ -22,10 +22,12 @@ define([
             },
             itemShow: function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 this.trigger('item:show', this.model);
             },
             itemEdit: function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 this.trigger('item:edit', this.model);
             },
             highlightName: function(e) {
@@ -35,7 +37,7 @@ define([
         });
 
         View.Items = Marionette.CompositeView.extend({
-            tagName: 'table',
+            // tagName: 'table',
             className: 'table table-hover',
             template: ItemTableTpl,
             childView: View.Item,

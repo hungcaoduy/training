@@ -44,6 +44,7 @@ define([
 
                         itemListView.on('childview:item:edit', function(childView, args) {
                             console.log("Triggering up the item:edit to App");
+                            console.log('childView.model.id', childView.model.get('id'), childView, args);
                             App.trigger('item:edit', childView.model.id);
                         });
 

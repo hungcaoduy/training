@@ -27,17 +27,27 @@ define(['app', 'apps/config/options',
                 //console.log('Entities.Item is initialized!');
             },
             idAttribute: '_id',
-            urlRoot: Options.itemUrl()
+            urlRoot: function() {
+                //return Options.itemUrl(); // + '/' + this._id;
+                console('this isNew?', this.id, this.isNew);
+                if (this.isNew){
+                    return Options.itemUrl();
+                } else {
+                    return Options.itemUrl() + '/' + this.id;
+                }
+            }
         });
 
         Entities.ItemCollection = Backbone.PageableCollection.extend({
             model: Entities.Item,
-            url: Options.itemUrl(),
+            url: function() {
+                return Options.itemUrl()
+            }, 
             comparator: 'title',
             mode: 'client',
             state: {
                 firstPage: 0,
-                pageSize: 2,
+                pageSize: 10,
                 currentPage: 0
             },
             hasPrevious: function() {
@@ -108,7 +118,9 @@ define(['app', 'apps/config/options',
             },
 
             getItemEntity: function(itemId){
+                //var item = new Entities.Item({id: itemId, url: Options.itemUrl() + '/' + itemId});
                 var item = new Entities.Item({id: itemId});
+                // console.log('item url', Options.itemUrl() + '/' + itemId);
                 var defer = $.Deferred();
                 setTimeout(function(){
                     item.fetch({
@@ -128,8 +140,8 @@ define(['app', 'apps/config/options',
             return API.getItemEntities();
             //return new Entities.ItemCollection();
         });
-        App.reqres.setHandler('item:entity', function() {
-            return API.getItemEntity();
+        App.reqres.setHandler('item:entity', function(itemId) {
+            return API.getItemEntity(itemId);
         });
         App.reqres.setHandler('item:entity:new', function() {
             return new Entities.Item();

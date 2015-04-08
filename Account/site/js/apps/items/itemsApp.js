@@ -40,8 +40,8 @@ define(['app'], function(App) {
             },
             newItem: function() {
                 console.log('itemsApp API.newItem');
-                require(['items/list/listController'], function(ListController) {
-                    executeAction(ListController.newItem);
+                require(['apps/items/new/newController'], function(newController) {
+                    executeAction(newController.newItem);
                 });
             }
         };

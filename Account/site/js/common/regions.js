@@ -1,7 +1,7 @@
 define(['app','marionette'], function(app, Marionette) {
     app.module("Common.Regions", function(Regions, app, Backbone, Marionette, $, _){
         Regions.DialogRegion = Marionette.Region.extend({
-            el: '#dialog-region',
+            //el: '#dialog-region',
             onShow: function(view) {
                 this.listenTo(view, "dialog:close", this.closeDialog);
                 var self = this;
