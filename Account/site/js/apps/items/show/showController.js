@@ -10,11 +10,6 @@ define(['app', 'items/show/showView'], function(App, View) {
                             itemView = new View.Item({
                                 model: item
                             });
-
-                            itemView.on("item:edit", function(args){
-                                console.log(args);
-                                App.trigger("item:edit", args.model.id);
-                            });
                         }
                         else {
                             itemView = new View.MissingItem();

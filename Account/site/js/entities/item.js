@@ -28,18 +28,18 @@ define(['app', 'apps/config/options',
             },
             idAttribute: '_id',
             urlRoot: function() {
-                //return Options.itemUrl(); // + '/' + this._id;
+                return Options.itemUrl(); // + '/' + this._id;
                 // console('this isNew?', this.id, this.isNew);
-                if (!this.id){
+                /*if (!this.id){
                     return Options.itemUrl();
                 } else {
                     return Options.itemUrl() + '/' + this.id;
-                }
+                }*/
             }
         });
 
-        //Entities.ItemCollection = Backbone.PageableCollection.extend({
-        Entities.ItemCollection = Backbone.Collection.extend({
+        Entities.ItemCollection = Backbone.PageableCollection.extend({
+        // Entities.ItemCollection = Backbone.Collection.extend({
             model: Entities.Item,
             url: function() {
                 return Options.itemUrl();
@@ -50,7 +50,7 @@ define(['app', 'apps/config/options',
                 firstPage: 0,
                 pageSize: 10,
                 currentPage: 0
-            }/*,
+            },
             hasPrevious: function() {
                 return this.hasPreviousPage();
             },
@@ -64,7 +64,7 @@ define(['app', 'apps/config/options',
                 return {
                 totalRecords: res.totalEntries
                 };
-            }*//*,
+            }/*,
 
             // Get data of page that we want to get
             parseRecords: function(res) {

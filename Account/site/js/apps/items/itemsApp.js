@@ -90,6 +90,15 @@ define(['app'], function(App) {
             API.newItem();
         });
 
+        App.on('item:save', function(args) {
+            // console.log('handle item:new in itemsApp');
+            //App.navigate('items/new');
+            args.model.set(args.data);
+            args.model.save();
+            window.history.back();
+        });
+        
+
         App.addInitializer(function() {
             new ItemsAppRouter.Router({
                 controller: API

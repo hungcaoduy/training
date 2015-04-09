@@ -45,7 +45,7 @@ define([
                 paginator: '.js-paginator'
             },
             onRenderCollection: function() {
-                // this.showPaginator(this.collection);
+                this.showPaginator(this.collection);
             },
             showPaginator: function(collection) {
                 var paginator = new Backgrid.Extension.Paginator({

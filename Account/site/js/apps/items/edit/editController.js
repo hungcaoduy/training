@@ -5,8 +5,8 @@ define(['app', 'items/edit/editView'], function(App, View) {
                 require(['entities/item'], function(Item) {
                         // console.log('editItem: function(itemId)', itemId);
                         var fetchingItem = App.request("item:entity", itemId);
-                        // $.when(fetchingItem)
-                        fetchingItem.done(function(item){
+                        $.when(fetchingItem)
+                        .done(function(item){
                         var itemView;
                         // console.log('item to edit: ', itemId);
                         if(item !== undefined){
@@ -36,9 +36,9 @@ define(['app', 'items/edit/editView'], function(App, View) {
                                 model: item
                             });
 
-                            // itemView.on("item:edit", function(item){
-                            //     App.trigger("item:edit", item.get("itemId"));
-                            // });
+                            itemView.on("item:save", function(data){
+                                App.trigger("item:save", data);
+                            });
                         }
                         else {
                             itemView = new View.MissingItem();

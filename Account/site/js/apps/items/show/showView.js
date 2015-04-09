@@ -6,8 +6,13 @@ define(['app', 'tpl!items/show/templates/showItem.tpl', 'tpl!items/show/template
 
         View.Item = Marionette.ItemView.extend({
             template: ShowItemTpl,
-            triggers: {
-                'click .js-edit': 'item:edit'
+            events: {
+                'click .js-edit': 'itemEdit'
+            },
+            itemEdit: function(e) {
+                e.preventDefault();
+                //is this acceptable to trigger global event here?
+                App.trigger('item:edit', {model: this.model, id: this.model.id});
             }
         });
     });
