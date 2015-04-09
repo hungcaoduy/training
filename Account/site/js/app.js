@@ -36,13 +36,9 @@ define(['marionette', 'apps/config/marionette/regions/dialog'], function(Marione
         if(Backbone.history){
             require(['apps/items/itemsApp',
                 'apps/about/about_app',
-                // 'apps/header/header_app',
-                // 'apps/myheader/myheaderApp',
                 'apps/contacts/contacts_app'
                 ], function () {
                 Backbone.history.start();
-
-                console.log('app starting, current route is ', App.getCurrentRoute() || 'Default');
 
                 if(App.getCurrentRoute() === ''){
                     App.trigger('items:list');

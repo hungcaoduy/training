@@ -8,7 +8,6 @@ define([
         List.Controller = {
             listItems: function(criteria) {
                 require(['entities/item'], function() {
-                    console.log("ItemsApp.List ListItem");
                     var fetchingItems = App.reqres.request("item:entities");
                     var layoutView = new View.Layout();
                     var panelView = new View.Panel();
@@ -45,7 +44,8 @@ define([
                         itemListView.on('childview:item:edit', function(childView, args) {
                             console.log("Triggering up the item:edit to App");
                             console.log('childView.model.id', childView.model.get('id'), childView, args);
-                            App.trigger('item:edit', childView.model.id);
+                            //App.trigger('item:edit', childView.model.id);
+                            App.trigger('item:edit', {model: childView.model, id: childView.model.id});
                         });
 
                         itemListView.on('childview:item:delete', function(childView, args) {

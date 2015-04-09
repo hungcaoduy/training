@@ -3,11 +3,11 @@ define(['app'], function(App) {
         ItemsApp.startWithParent = false;
 
         ItemsApp.onStart = function () {
-            console.log('Starting ItemsApp');
+            // console.log('Starting ItemsApp');
         };
 
         ItemsApp.onStop = function() {
-            console.log('Stopping ItemsApp');
+            // console.log('Stopping ItemsApp');
         };
 
     });
@@ -38,8 +38,19 @@ define(['app'], function(App) {
                     executeAction(editController.editItem, id);
                 });
             },
+            editItemModel: function(model) {
+                require(['apps/items/edit/editController'], function(editController) {
+                    // executeAction(editController.editItem, id);
+                    executeAction(editController.editItemModel, model);
+                });
+            },
+            editItemById: function(id) {
+                require(['apps/items/edit/editController'], function(editController) {
+                    executeAction(editController.editItemById, id);
+                });
+            },
             newItem: function() {
-                console.log('itemsApp API.newItem');
+                // console.log('itemsApp API.newItem');
                 require(['apps/items/new/newController'], function(newController) {
                     executeAction(newController.newItem);
                 });
@@ -53,25 +64,28 @@ define(['app'], function(App) {
         };
 
         App.on('items:list', function() {
-            console.log('App.on:items:list');
+            // console.log('App.on:items:list');
             App.navigate('items');
             API.listItems();
         });
 
         App.on('item:show', function(id) {
-            console.log('handle item:show in itemsApp');
+            // console.log('handle item:show in itemsApp');
             App.navigate('items/' + id);
             API.showItem(id);
         });
 
-        App.on('item:edit', function(id) {
-            console.log('handle item:edit in itemsApp');
+        App.on('item:edit', function(item) {
+            var id = item.id;
+            console.log('item:edit id=', id);
             App.navigate('items/' + id + '/edit');
-            API.editItem(id);
+            API.editItemById(id);
+            // API.editItemModel(item.model);
+            // API.editItem(id);//why does not this work
         });
 
         App.on('item:new', function() {
-            console.log('handle item:new in itemsApp');
+            // console.log('handle item:new in itemsApp');
             App.navigate('items/new');
             API.newItem();
         });

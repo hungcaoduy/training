@@ -5,7 +5,7 @@
     return ;
 });*/
 
-define(['app', 'apps/config/options', 
+define(['app', 'apps/config/options',
     'apps/config/storage/localstorage',
     'backbone.paginator'
     ], function(App, Options) {
@@ -24,13 +24,13 @@ define(['app', 'apps/config/options',
                 updatedBy: 'Unknown'
             },
             initialize: function(options) {
-                //console.log('Entities.Item is initialized!');
+                // console.log('Entities.Item is initialized!', this);
             },
             idAttribute: '_id',
             urlRoot: function() {
                 //return Options.itemUrl(); // + '/' + this._id;
-                console('this isNew?', this.id, this.isNew);
-                if (this.isNew){
+                // console('this isNew?', this.id, this.isNew);
+                if (!this.id){
                     return Options.itemUrl();
                 } else {
                     return Options.itemUrl() + '/' + this.id;
@@ -38,18 +38,19 @@ define(['app', 'apps/config/options',
             }
         });
 
-        Entities.ItemCollection = Backbone.PageableCollection.extend({
+        //Entities.ItemCollection = Backbone.PageableCollection.extend({
+        Entities.ItemCollection = Backbone.Collection.extend({
             model: Entities.Item,
             url: function() {
-                return Options.itemUrl()
-            }, 
+                return Options.itemUrl();
+            },
             comparator: 'title',
             mode: 'client',
             state: {
                 firstPage: 0,
                 pageSize: 10,
                 currentPage: 0
-            },
+            }/*,
             hasPrevious: function() {
                 return this.hasPreviousPage();
             },
@@ -63,7 +64,7 @@ define(['app', 'apps/config/options',
                 return {
                 totalRecords: res.totalEntries
                 };
-            }/*,
+            }*//*,
 
             // Get data of page that we want to get
             parseRecords: function(res) {
@@ -109,7 +110,6 @@ define(['app', 'apps/config/options',
                 $.when(promise).done(function(items){
                     if(items.length === 0){
                         // if we don't have any items yet, create some for convenience
-                        console.log('we need to initialize data');
                         var models = initializeItems();
                         items.reset(models);
                     }
@@ -118,30 +118,49 @@ define(['app', 'apps/config/options',
             },
 
             getItemEntity: function(itemId){
-                //var item = new Entities.Item({id: itemId, url: Options.itemUrl() + '/' + itemId});
-                var item = new Entities.Item({id: itemId});
-                // console.log('item url', Options.itemUrl() + '/' + itemId);
+                console.log('this is itemid', itemId);
+
+                var item = new Entities.Item({id: itemId, url: '/api/items/' + itemId});
+                // var item = new Entities.Item({id: itemId});
+                console.log('getting item with id=', itemId);
                 var defer = $.Deferred();
-                setTimeout(function(){
-                    item.fetch({
-                        success: function(data){
-                        defer.resolve(data);
-                        },
-                        error: function(data){
-                            defer.resolve(undefined);
-                        }
-                    });
-                }, 2000);
+                item.fetch({
+                    success: function(data){
+                        defer.resolve(new Entities.Item(data));
+                        console.log('getItemEntity, data', data);
+                    },
+                    error: function(data){
+                        console.log('item is NOT fetched, something wrong');
+                        defer.resolve(undefined);
+                    }
+                });
+                return defer.promise();
+            },
+
+            getItemEntityById: function(itemId){
+                var item;
+                var defer = $.Deferred();
+                $.ajax({
+                    url: '/api/items/' + itemId
+                }).done(function(data) {
+                    console.log('data is', data);
+                    item = new Entities.Item(data);
+                    defer.resolve(item);
+                    console.log('next will return this item:', item);
+                    return item;
+                });
                 return defer.promise();
             }
         };
 
         App.reqres.setHandler('item:entities', function() {
             return API.getItemEntities();
-            //return new Entities.ItemCollection();
         });
         App.reqres.setHandler('item:entity', function(itemId) {
             return API.getItemEntity(itemId);
+        });
+        App.reqres.setHandler('item:entityById', function(itemId) {
+            return API.getItemEntityById(itemId);
         });
         App.reqres.setHandler('item:entity:new', function() {
             return new Entities.Item();

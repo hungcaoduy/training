@@ -31,7 +31,6 @@ define([
                 this.trigger('item:edit', this.model);
             },
             highlightName: function(e) {
-                console.log($(e.target).text());
                 this.$el.toggleClass('warning');
             },
         });
@@ -46,7 +45,7 @@ define([
                 paginator: '.js-paginator'
             },
             onRenderCollection: function() {
-                this.showPaginator(this.collection);
+                // this.showPaginator(this.collection);
             },
             showPaginator: function(collection) {
                 var paginator = new Backgrid.Extension.Paginator({
@@ -54,7 +53,6 @@ define([
                 });
                 this.ui.paginator.empty();
                 if (collection.length>0) {
-                    console.log("paginator", this.ui.paginator, collection.length);
                     this.ui.paginator.append(paginator.render().$el);
                 }
             }

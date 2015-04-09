@@ -5,9 +5,32 @@ define(['app', 'items/edit/editView'], function(App, View) {
                 require(['entities/item'], function(Item) {
                         // console.log('editItem: function(itemId)', itemId);
                         var fetchingItem = App.request("item:entity", itemId);
-                        $.when(fetchingItem).done(function(item){
+                        // $.when(fetchingItem)
+                        fetchingItem.done(function(item){
                         var itemView;
                         // console.log('item to edit: ', itemId);
+                        if(item !== undefined){
+                            itemView = new View.Item({
+                                model: item
+                            });
+                        }
+                        else {
+                            itemView = new View.MissingItem();
+                        }
+
+                        App.dialogRegion.show(itemView);
+                    });
+                });
+            },
+            editItemById: function(itemId) {
+                require(['entities/item'], function(Item) {
+                    // console.log('editItem: function(itemId)', itemId);
+                    var fetchingItem = App.request("item:entityById", itemId);
+                    //fetchingItem
+                    $.when(fetchingItem)
+                    .done(function(item){
+                        var itemView;
+                        console.log('item is fetched: ', itemId);
                         if(item !== undefined){
                             itemView = new View.Item({
                                 model: item
@@ -20,7 +43,6 @@ define(['app', 'items/edit/editView'], function(App, View) {
                         else {
                             itemView = new View.MissingItem();
                         }
-
                         App.dialogRegion.show(itemView);
                     });
                 });
