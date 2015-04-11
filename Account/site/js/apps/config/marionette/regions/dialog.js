@@ -18,7 +18,13 @@ define(["marionette", "jquery-ui"], function(Marionette){
       this.stopListening();
       this.empty();
       this.$el.dialog("destroy");
+      window.history.back();
+    },
+    onEmpty: function() {
+        console.log('DialogRegion is now emptied');
+        // window.history.back();            
     }
+
   });
 
   return Marionette.Region.Dialog;

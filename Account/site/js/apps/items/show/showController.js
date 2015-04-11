@@ -3,7 +3,7 @@ define(['app', 'items/show/showView'], function(App, View) {
         Show.Controller = {
             showItem: function(id) {
                 require(['entities/item'], function(Item) {
-                        var fetchingItem = App.request("item:entity", id);
+                        var fetchingItem = App.request("item:entityById", id);
                         $.when(fetchingItem).done(function(item){
                         var itemView;
                         if(item !== undefined){

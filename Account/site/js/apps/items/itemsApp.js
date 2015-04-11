@@ -18,8 +18,11 @@ define(['app'], function(App) {
             appRoutes: {
                 'items': 'listItems',
                 'items/:id': 'showItem',
-                'items/:id/edit': 'editItem',
+                'items/:id/edit': 'editItemById',
                 'items/new': 'newItem'
+            },
+            onRoute: function(name, path, arguments) {
+                console.log('name, path, arguments', name, path, arguments);
             }
         });
         var API = {
@@ -64,38 +67,29 @@ define(['app'], function(App) {
         };
 
         App.on('items:list', function() {
-            // console.log('App.on:items:list');
             App.navigate('items');
-            API.listItems();
+            // API.listItems(); //don't need such call with help of {trgger: true} of Backbone.history.navigate({trigger: true})
         });
 
-        App.on('item:show', function(id) {
-            // console.log('handle item:show in itemsApp');
+        App.on('item:show', function(item) {
+            var id = item.id;
             App.navigate('items/' + id);
-            API.showItem(id);
+            // API.showItem(id);
         });
 
         App.on('item:edit', function(item) {
             var id = item.id;
-            console.log('item:edit id=', id);
             App.navigate('items/' + id + '/edit');
-            API.editItemById(id);
-            // API.editItemModel(item.model);
-            // API.editItem(id);//why does not this work
         });
 
         App.on('item:new', function() {
-            // console.log('handle item:new in itemsApp');
             App.navigate('items/new');
-            API.newItem();
+            // API.newItem();
         });
 
         App.on('item:save', function(args) {
-            // console.log('handle item:new in itemsApp');
-            //App.navigate('items/new');
             args.model.set(args.data);
             args.model.save();
-            window.history.back();
         });
         
 

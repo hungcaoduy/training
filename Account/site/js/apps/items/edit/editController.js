@@ -3,12 +3,10 @@ define(['app', 'items/edit/editView'], function(App, View) {
         Edit.Controller = {
             editItem: function(itemId) {
                 require(['entities/item'], function(Item) {
-                        // console.log('editItem: function(itemId)', itemId);
                         var fetchingItem = App.request("item:entity", itemId);
                         $.when(fetchingItem)
                         .done(function(item){
                         var itemView;
-                        // console.log('item to edit: ', itemId);
                         if(item !== undefined){
                             itemView = new View.Item({
                                 model: item
@@ -24,9 +22,7 @@ define(['app', 'items/edit/editView'], function(App, View) {
             },
             editItemById: function(itemId) {
                 require(['entities/item'], function(Item) {
-                    // console.log('editItem: function(itemId)', itemId);
                     var fetchingItem = App.request("item:entityById", itemId);
-                    //fetchingItem
                     $.when(fetchingItem)
                     .done(function(item){
                         var itemView;

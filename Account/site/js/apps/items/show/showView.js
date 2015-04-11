@@ -12,6 +12,7 @@ define(['app', 'tpl!items/show/templates/showItem.tpl', 'tpl!items/show/template
             itemEdit: function(e) {
                 e.preventDefault();
                 //is this acceptable to trigger global event here?
+                console.log('model ', this.model);
                 App.trigger('item:edit', {model: this.model, id: this.model.id});
             }
         });

@@ -1,4 +1,6 @@
-define(['marionette', 'apps/config/marionette/regions/dialog'], function(Marionette){
+define(['marionette', 
+    'apps/config/marionette/regions/dialog'
+    ], function(Marionette){
     var App = new Marionette.Application();
 
     App.addRegions({
@@ -11,6 +13,7 @@ define(['marionette', 'apps/config/marionette/regions/dialog'], function(Marione
 
     App.navigate = function(route,  options){
         options || (options = {});
+        options = _.extend(options, {'trigger': true})
         Backbone.history.navigate(route, options);
     };
 
@@ -39,6 +42,7 @@ define(['marionette', 'apps/config/marionette/regions/dialog'], function(Marione
                 'apps/contacts/contacts_app'
                 ], function () {
                 Backbone.history.start();
+                // Backbone.history.start({pushState: true});
 
                 if(App.getCurrentRoute() === ''){
                     App.trigger('items:list');

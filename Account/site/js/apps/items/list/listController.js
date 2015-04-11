@@ -36,18 +36,16 @@ define([
                         // var itemListView = new View.Items({collection: filteredItems});
                         var itemListView = new View.Items({collection: items});
 
-                        itemListView.on('childview:item:show', function(childView, args) {
-                            console.log("Triggering up the item:show to App");
-                            App.trigger('item:show', childView.model.id);
+                        itemListView.on('childview:item:show', function(childView) {
+                            App.trigger('item:show', {model: childView.model, id: childView.model.id});
                         });
 
-                        itemListView.on('childview:item:edit', function(childView, args) {
+                        itemListView.on('childview:item:edit', function(childView) {
                             App.trigger('item:edit', {model: childView.model, id: childView.model.id});
                         });
 
-                        itemListView.on('childview:item:delete', function(childView, args) {
-                            console.log('removing item ', args.model.get('title'));
-                            args.model.destroy();
+                        itemListView.on('childview:item:delete', function(childView) {
+                            childView.model.destroy();
                         });
 
                         panelView.on('panel:item:filter', function(criterion) {

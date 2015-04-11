@@ -1,3 +1,71 @@
+requirejs.config({
+  baseUrl: 'js',
+  paths: {
+    backbone: 'lib/backbone',
+    'backbone.picky': 'lib/backbone.picky',
+    'backbone.syphon': 'lib/backbone.syphon',
+    jquery: 'lib/jquery',
+    'jquery-dateFormat': 'lib/jquery-dateFormat',
+    'jquery-ui': 'lib/jquery-ui',
+    json2: 'lib/json2',
+    localstorage: 'lib/backbone.localstorage',
+    marionette: 'lib/backbone.marionette',
+    spin: 'lib/spin',
+    'spin.jquery': 'lib/spin.jquery',
+    text: 'lib/text',
+    tpl: 'lib/underscore-tpl',
+    // underscore: 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore',
+    underscore: 'lib/underscore',
+    'backbone.paginator': 'lib/backbone.paginator',
+    'backgrid': 'lib/backgrid',
+    'backgrid.paginator': 'lib/backgrid-paginator',
+    'items': 'apps/items',
+    'header': 'apps/myheader'
+  },
+
+  shim: {
+    underscore: {
+      exports: '_'
+    },
+    backbone: {
+      deps: ['jquery', 'underscore', 'json2'],
+      exports: 'Backbone'
+    },
+    'backbone.picky': ['backbone'],
+    'backbone.syphon': ['backbone'],
+    marionette: {
+      deps: ['backbone'],
+      exports: 'Marionette'
+    },
+    'jquery-ui': ['jquery'],
+    localstorage: ['backbone'],
+    'spin.jquery': ['spin', 'jquery'],
+    tpl: ['text'],
+    'backgrid': {
+      deps: [
+        'backbone'
+      ]
+    },
+    'backgrid.paginator': {
+      deps: [
+        'backgrid'
+      ]
+    }
+  }
+});
+
+require([
+    'app',
+    //'header/header_app'
+    'header/myheaderApp'
+], function (App) {
+    'use strict';
+
+    App.start();
+
+});
+
+
 /*require.config({
     waitSeconds: 10,
     paths: {
@@ -48,71 +116,3 @@
     },
     deps: ['jquery', 'underscore']
 });*/
-
-requirejs.config({
-  baseUrl: "js",
-  paths: {
-    backbone: "lib/backbone",
-    "backbone.picky": "lib/backbone.picky",
-    "backbone.syphon": "lib/backbone.syphon",
-    jquery: "lib/jquery",
-    'jquery-dateFormat': 'lib/jquery-dateFormat',
-    "jquery-ui": "lib/jquery-ui",
-    json2: "lib/json2",
-    localstorage: "lib/backbone.localstorage",
-    marionette: "lib/backbone.marionette",
-    spin: "lib/spin",
-    "spin.jquery": "lib/spin.jquery",
-    text: "lib/text",
-    tpl: "lib/underscore-tpl",
-    // underscore: "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore",
-    underscore: "lib/underscore",
-    "backbone.paginator": "lib/backbone.paginator",
-    'backgrid': 'lib/backgrid',
-    'backgrid.paginator': 'lib/backgrid-paginator',
-    'items': 'apps/items',
-    'header': 'apps/myheader'
-  },
-
-  shim: {
-    underscore: {
-      exports: "_"
-    },
-    backbone: {
-      deps: ["jquery", "underscore", "json2"],
-      exports: "Backbone"
-    },
-    "backbone.picky": ["backbone"],
-    "backbone.syphon": ["backbone"],
-    marionette: {
-      deps: ["backbone"],
-      exports: "Marionette"
-    },
-    "jquery-ui": ["jquery"],
-    localstorage: ["backbone"],
-    "spin.jquery": ["spin", "jquery"],
-    tpl: ["text"],
-    'backgrid': {
-      deps: [
-        'backbone'
-      ]
-    },
-    'backgrid.paginator': {
-      deps: [
-        'backgrid'
-      ]
-    }
-  }
-});
-
-require([
-    'app',
-    //'header/header_app'
-    'header/myheaderApp'
-], function (App) {
-    'use strict';
-
-    App.start();
-
-});
-

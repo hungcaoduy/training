@@ -13,26 +13,22 @@ define([
             template: ItemRowTpl,
             tagName: 'tr',
             triggers: {
+            'click td a.js-show': 'item:show',
+            'click td a.js-edit': 'item:edit',
             'click button.js-delete': 'item:delete'
             },
             events: {
-            'click td a.js-show': 'itemShow',
-            'click td a.js-edit': 'itemEdit',
             'click': 'highlightName'
-            },
-            itemShow: function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                this.trigger('item:show', this.model);
-            },
-            itemEdit: function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                this.trigger('item:edit', this.model);
             },
             highlightName: function(e) {
                 this.$el.toggleClass('warning');
             },
+            remove: function(){
+                var self = this;
+                this.$el.fadeOut(function(){
+                    Marionette.ItemView.prototype.remove.call(self);
+                });
+            }
         });
 
         View.Items = Marionette.CompositeView.extend({

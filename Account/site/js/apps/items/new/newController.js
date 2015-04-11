@@ -10,15 +10,7 @@ define(['app', 'apps/items/new/newView'], function(App, View) {
                             itemView = new View.Item({
                                 model: item
                             });
-
-                            // itemView.on("item:edit", function(item){
-                            //     App.trigger("item:edit", item.get("id"));
-                            // });
                         }
-                        // else {
-                        //     itemView = new View.MissingItem();
-                        // }
-
                         App.dialogRegion.show(itemView);
                     });
                 });
