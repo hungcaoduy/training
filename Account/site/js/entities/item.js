@@ -120,13 +120,13 @@ define(['app', 'apps/config/options',
             getItemEntity: function(itemId){
                 console.log('this is itemid', itemId);
 
-                var item = new Entities.Item({id: itemId, url: '/api/items/' + itemId});
-                // var item = new Entities.Item({id: itemId});
-                console.log('getting item with id=', itemId);
+                // var item = new Entities.Item({id: itemId, url: '/api/items/' + itemId});
+                var item = new Entities.Item({id: itemId});
+                console.log('getting item with id=', itemId, item.url(), item);
                 var defer = $.Deferred();
                 item.fetch({
                     success: function(data){
-                        defer.resolve(new Entities.Item(data));
+                        defer.resolve(data);
                         console.log('getItemEntity, data', data);
                     },
                     error: function(data){

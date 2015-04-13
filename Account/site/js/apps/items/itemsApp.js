@@ -17,12 +17,13 @@ define(['app'], function(App) {
         ItemsAppRouter.Router = Marionette.AppRouter.extend({
             appRoutes: {
                 'items': 'listItems',
+                'items/new': 'newItem',
                 'items/:id': 'showItem',
-                'items/:id/edit': 'editItemById',
-                'items/new': 'newItem'
+                'items/:id/edit': 'editItemById'
+                // 'items/:id/edit': 'editItem',
             },
             onRoute: function(name, path, arguments) {
-                console.log('name, path, arguments', name, path, arguments);
+                console.log('name, path, arguments:', name, path, arguments);
             }
         });
         var API = {
@@ -53,8 +54,9 @@ define(['app'], function(App) {
                 });
             },
             newItem: function() {
-                // console.log('itemsApp API.newItem');
+                console.log('itemsApp API.newItem');
                 require(['apps/items/new/newController'], function(newController) {
+                    console.log('I will call newController.newItem');
                     executeAction(newController.newItem);
                 });
             }
@@ -83,6 +85,7 @@ define(['app'], function(App) {
         });
 
         App.on('item:new', function() {
+            console.log('I catch item:new, App say');
             App.navigate('items/new');
             // API.newItem();
         });

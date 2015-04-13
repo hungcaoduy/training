@@ -3,13 +3,15 @@ define(['app', 'apps/items/new/newView'], function(App, View) {
         New.Controller = {
             newItem: function() {
                 require(['entities/item'], function(Item) {
-                        var fetchingItem = App.request("item:entity:new");
-                        $.when(fetchingItem).done(function(item){
+                    var fetchingItem = App.request("item:entity:new");
+                    $.when(fetchingItem).done(function(item){
                         var itemView;
                         if(item !== undefined){
                             itemView = new View.Item({
                                 model: item
                             });
+                        } else {
+                            console.log('Item could not be resolved');
                         }
                         App.dialogRegion.show(itemView);
                     });

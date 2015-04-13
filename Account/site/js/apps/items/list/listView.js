@@ -59,22 +59,13 @@ define([
             initialize: function(options) {
             },
             events: {
-                'click .js-save': 'saveItem',
-                'click .js-new': 'newItem',
-                'click .js-mass-delete': 'massDelete',
                 'submit #filter-form': 'filterItems', //do next: for this, I want to search remotely
                 'keyup #filter-form input': 'filterItems' //for this, I want to filter current collection on local
             },
-            newItem: function(e) {
-                console.log('panel new item click!');
-                this.triggerMethod('panel:new:item');
-            },
-            saveItem: function(e) {
-                console.log('panel save click!');
-                this.triggerMethod('panel:save:item');
-            },
-            massDelete: function(e) {
-                this.triggerMethod('panel:mass:delete');
+            triggers: {
+                'click .js-new': 'item:new',
+                'click .js-save': 'item:save',
+                'click .js-mass-delete': 'item:mass:delete'
             },
             config: {
                 searchTimeout: {},
@@ -87,7 +78,7 @@ define([
                 clearTimeout(this.config.searchTimeout);
                 this.config.searchTimeout = setTimeout(function() {
                     var criterion = this.$(".js-filter-criterion").val();
-                    self.trigger("panel:item:filter", criterion);
+                    self.trigger("item:filter", criterion);
                     console.log("panel:item:filter is triggered");
                 }, this.config.searchDelay);
             }

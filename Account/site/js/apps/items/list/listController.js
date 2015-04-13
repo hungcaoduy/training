@@ -48,9 +48,14 @@ define([
                             childView.model.destroy();
                         });
 
-                        panelView.on('panel:item:filter', function(criterion) {
+                        panelView.on('item:filter', function(criterion) {
                             filteredItems.filter(criterion);
                             console.log('items is filtered');
+                        });
+
+                        layoutView.on('childview:item:new', function() {
+                            console.log('catch item:new from childview, about to delegate to App');
+                            App.trigger('item:new');
                         });
 
                         layoutView.showChildView('listRegion', itemListView);
