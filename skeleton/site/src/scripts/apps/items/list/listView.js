@@ -1,14 +1,9 @@
-//Backbone = require('backbone');
-// Marionette.Region.Dialog.extend = 'apps/config/marionette/regions/dialog';
-// jquery-ui, jquery-dateFormat, backgrid.paginator
 
 var ItemRowTpl = require('./templates/itemRow.jade');
 var ItemTableTpl = require('./templates/itemTable.jade');
 var PanelTpl = require('./templates/panel.jade');
 var LayoutTpl = require('./templates/layout.jade');
-
-// Backgrid = require('backgrid-paginator');
-
+var GridTpl = require('./templates/grid.jade');
 var View = {};
 View.Item = Marionette.ItemView.extend({
     template: ItemRowTpl,
@@ -36,14 +31,14 @@ View.Item = Marionette.ItemView.extend({
 });
 
 View.Items = Marionette.CompositeView.extend({
-    tagName: 'table',
+    // tagName: 'table',
     className: 'table table-hover',
     template: ItemTableTpl,
     childView: View.Item,
     childViewContainer: 'tbody',
     ui: {
         paginator: '.js-paginator'
-    }/*,
+    },
     onRenderCollection: function() {
         this.showPaginator(this.collection);
     },
@@ -55,7 +50,33 @@ View.Items = Marionette.CompositeView.extend({
         if (collection.length>0) {
             this.ui.paginator.append(paginator.render().$el);
         }
-    }*/
+    }
+});
+
+View.Grid = Marionette.ItemView.extend({
+    template: GridTpl,
+    ui: {
+        paginator: '.js-paginator',
+        grid: '.js-grid'
+    },
+    onRender: function() {
+        var columns = [
+        {name: 'image', label: 'image', cell: 'string'},
+        {name: 'title', label: 'title', cell: 'string'},
+        {name: 'description', label: 'description', cell: 'string'}
+        ];
+        var grid = new Backgrid.Grid({columns: columns, collection: this.collection});
+
+        var paginator = new Backgrid.Extension.Paginator({
+            collection: this.collection
+        });
+        this.ui.paginator.empty();
+        this.ui.grid.empty();
+        if (this.collection.length>0) {
+            this.ui.paginator.append(paginator.render().$el);
+            this.ui.grid.append(grid.render().$el);
+        }
+    }
 });
 
 View.Panel = Marionette.ItemView.extend({

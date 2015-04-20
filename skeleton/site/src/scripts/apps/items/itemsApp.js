@@ -4,7 +4,6 @@ Backbone.$ = $;
 var Marionette = require('backbone.marionette');
 
 var Dialog = require('scripts/common/dialog');
-
 var App = new Marionette.Application();
 
 App.addRegions({
@@ -46,6 +45,7 @@ var API = {
     listItems: function(criterion) {
         var ListController = require('scripts/apps/items/list/listController');
         executeAction(ListController.listItems, criterion);
+        // executeAction(ListController.gridItems, criterion);
     },
     showItem: function(id) {
         var showController = require('scripts/apps/items/show/showController');
@@ -101,6 +101,11 @@ globalItemChannel.commands.setHandler('show:dialog', function(view) {
     App.dialogRegion.show(view);
 });
 
+globalItemChannel.commands.setHandler('show:header', function(view) {
+    console.log('about to show header');
+    App.headerRegion.show(view);
+});
+
 globalItemChannel.commands.setHandler('go:back', function() {
     window.history.back();
 })
@@ -115,25 +120,12 @@ App.addInitializer(function() {
 App.on('start', function(){
     if(Backbone.history){
         Backbone.history.start();
-
-        console.log('I am started');
-
-/*        App.on('items:list', function() {
-            var fetchingItems = globalItemChannel.reqres.request('item:entities');
-            console.log('fetching')
-            $.when(fetchingItems).done(function(items) {
-                console.log('items:', items);
-                console.log('about to show view');
-                var ItemsView = require('./apps/items/list/listView');
-                var itemsView = new ItemsView.Items({collection: items});
-                App.mainRegion.show(itemsView);
-            });
-        });
-*/
         if(App.getCurrentRoute() === ''){
-            console.log('routing now');
             globalItemChannel.commands.execute('list:items');
         }
+
+        var header = require('scripts/apps/header/list/listController');
+        header.listHeader();
     }
 });
 

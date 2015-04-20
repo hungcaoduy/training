@@ -151,12 +151,14 @@ gulp.task('assets', function() {
 
 gulp.task('vendor-styles', function() {
   stream = gulp.src([
-      paths.vendor + 'styles/bootstrap.css',
-      paths.vendor + 'styles/bootstrap-theme.css.map',
-      paths.vendor + 'styles/bootstrap-theme.css',
       paths.vendor + 'styles/jquery-ui.structure.css',
       paths.vendor + 'styles/jquery-ui.css',
-      paths.vendor + 'styles/jquery-ui.theme.css'
+      paths.vendor + 'styles/jquery-ui.theme.css',
+      paths.vendor + 'backgrid/lib/backgrid.css',
+      paths.vendor + 'backgrid-paginator/backgrid-paginator.css',
+      paths.vendor + 'styles/bootstrap-theme.css.map',
+      paths.vendor + 'styles/bootstrap-theme.css',
+      paths.vendor + 'styles/bootstrap.css',
     ])
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -182,11 +184,11 @@ gulp.task('vendor-scripts', function() {
         paths.vendor + 'scripts/backbone.paginator.js',
         paths.vendor + 'scripts/backbone.marionette.js',
         paths.vendor + 'scripts/bootstrap.js',
-        // paths.vendor + 'scripts/backgrid.js',//sound like this does not work, only work after npm install
-        // paths.vendor + 'scripts/backgrid-paginator.js',//sound like this does not work, only work after npm install
         paths.vendor + 'scripts/backbone.syphon.js',
         paths.vendor + 'scripts/backbone.picky.js',
-        paths.vendor + 'scripts/backbone.localStorage.js'
+        paths.vendor + 'scripts/backbone.localStorage.js',
+        paths.vendor + 'backgrid/lib/backgrid.js',
+        paths.vendor + 'backgrid-paginator/backgrid-paginator.js',
     ])
     .pipe(plumber())
     .pipe(sourcemaps.init())

@@ -41,7 +41,7 @@ var ItemCollection = Backbone.PageableCollection.extend({
     mode: 'client',
     state: {
         firstPage: 0,
-        pageSize: 10,
+        pageSize: 2,
         currentPage: 0
     },
     hasPrevious: function() {
